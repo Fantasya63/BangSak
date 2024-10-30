@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://qn5lyj2puteh"]
+
+[ext_resource type="Script" path="res://scenes/multiplayer_test.gd" id="1_yqiu3"]
+[ext_resource type="PackedScene" uid="uid://gbjkjwj50dbo" path="res://prefabs/player.tscn" id="2_7clw8"]
+
+[node name="Multiplayer test" type="Node2D"]
+script = ExtResource("1_yqiu3")
+player_scene = ExtResource("2_7clw8")
+gui_path = NodePath("UI")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer"]
+layout_mode = 2
+
+[node name="Host" type="Button" parent="UI/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host Game"
+
+[node name="Join" type="Button" parent="UI/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join Game
+"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://prefabs/player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="UI/CenterContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI/CenterContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]
