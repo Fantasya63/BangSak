@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://j3130qub3iyn"
-path="res://.godot/imported/Player.png-11be395149bea1441ea440f69f822c71.ctex"
+uid="uid://bkplewmxa1giq"
+path="res://.godot/imported/decors.png-e4a7b6b311188ab0c42cca5a1fa414f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/BangSakTemps/Player/Player.png"
-dest_files=["res://.godot/imported/Player.png-11be395149bea1441ea440f69f822c71.ctex"]
+source_file="res://assets/textures/BangSakTemps/Textures/decor/decors.png"
+dest_files=["res://.godot/imported/decors.png-e4a7b6b311188ab0c42cca5a1fa414f8.ctex"]
 
 [params]
 
