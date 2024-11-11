@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckimivta2ubpj"]
+[gd_scene load_steps=3 format=3 uid="uid://ckimivta2ubpj"]
 
 [ext_resource type="PackedScene" uid="uid://gbjkjwj50dbo" path="res://prefabs/player.tscn" id="1_wmul1"]
+
+[sub_resource type="TileSet" id="TileSet_6125s"]
 
 [node name="Scene" type="Node2D"]
 
@@ -10,3 +12,6 @@ zoom = Vector2(4.275, 4.275)
 [node name="player" parent="." instance=ExtResource("1_wmul1")]
 position = Vector2(37, 25)
 walk_speed = 100.0
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_6125s")
