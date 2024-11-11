@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://bahawbj7e6eq5"]
+
+[ext_resource type="Script" path="res://scripts/arrow.gd" id="1_l8vyr"]
+[ext_resource type="Texture2D" uid="uid://cb84wjvllhfg5" path="res://assets/textures/BangSakTemps/slipper holder.png" id="2_ked1q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydd5i"]
+atlas = ExtResource("2_ked1q")
+region = Rect2(0, 0, 16, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wrj2t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydd5i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o6tw5"]
+radius = 7.0
+height = 14.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0nxfl"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Sprite2D:flip_h")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimatedSprite2D:animation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="Slipper" type="Area2D"]
+script = ExtResource("1_l8vyr")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wrj2t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_o6tw5")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0.5, 7.15255e-08)
+scale = Vector2(0.25, 0.7)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_0nxfl")
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

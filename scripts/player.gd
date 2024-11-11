@@ -7,6 +7,10 @@ var walk_speed := 75.0
 @export_range(0.0, 1.0)
 var anim_speed_scale := 0.01
 
+var slipper_equipped = true
+var slipper_cooldown = true
+var slipper = preload("res://prefabs/slipper.tscn")
+
 enum SPRITE_DIR { UP, DOWN, LEFT, RIGHT }
 var sprite_dir : SPRITE_DIR = SPRITE_DIR.DOWN
 
@@ -44,10 +48,22 @@ func _physics_process(delta):
 	# Set the players velocity
 	velocity = move_input * walk_speed
 	
-	play_anim()
 	move_and_slide()
-
-
+	
+	var mouse_pos = get_global_mouse_position()
+	$Marker2D.look_at(mouse_pos)
+	
+	if Input.is_action_just_pressed("Shoot") and slipper_equipped and slipper_cooldown:
+		slipper_cooldown = false
+		var slipper_instance = slipper.instantiate()
+		slipper_instance.rotation = $Marker2D.rotation
+		slipper_instance.global_position = $Marker2D.global_position
+		call_deferred("add_child", slipper_instance)
+		
+		await get_tree().create_timer(0.4).timeout
+		slipper_cooldown = true
+		
+	play_anim()
 func play_anim():
 	var speed := velocity.length()
 	if speed > 0.0:
