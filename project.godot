@@ -14,6 +14,10 @@ config/name="bangsak"
 run/main_scene="res://scenes/multiplayer_test.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [input]
 
 up={

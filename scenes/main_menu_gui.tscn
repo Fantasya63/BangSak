@@ -1,0 +1,196 @@
+[gd_scene load_steps=14 format=3 uid="uid://bw6viuij2kx0s"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_ky4fw"]
+[ext_resource type="FontFile" uid="uid://kb8pm310g163" path="res://assets/fonts/Montseratt/static/Montserrat-Bold.ttf" id="2_ylcoa"]
+[ext_resource type="FontFile" uid="uid://6r342ivmh023" path="res://assets/fonts/Quiapo/Quiapo_Free.ttf" id="3_xlh6t"]
+[ext_resource type="Texture2D" uid="uid://dxn3rir74cuat" path="res://assets/textures/gui/account_icon.svg" id="4_pavrp"]
+[ext_resource type="Texture2D" uid="uid://dwcwph7b6ocge" path="res://assets/textures/gui/account_icon_pressed.svg" id="5_3p6ak"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wok60"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m3eao"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gbdiw"]
+bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.0898438, 0.0898438, 0.0898438, 1)
+corner_radius_top_left = 33
+corner_radius_top_right = 33
+corner_radius_bottom_right = 33
+corner_radius_bottom_left = 33
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8xc6s"]
+bg_color = Color(0.964706, 0.964706, 0.964706, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+corner_radius_top_left = 33
+corner_radius_top_right = 33
+corner_radius_bottom_right = 33
+corner_radius_bottom_left = 33
+
+[sub_resource type="Theme" id="Theme_qtwgq"]
+Button/colors/font_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 28
+Button/fonts/font = ExtResource("2_ylcoa")
+Button/styles/disabled = SubResource("StyleBoxFlat_wok60")
+Button/styles/focus = SubResource("StyleBoxEmpty_m3eao")
+Button/styles/hover = SubResource("StyleBoxFlat_gbdiw")
+Button/styles/normal = SubResource("StyleBoxFlat_8xc6s")
+Button/styles/pressed = SubResource("StyleBoxFlat_8xc6s")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wakh"]
+bg_color = Color(0, 0, 0, 0)
+draw_center = false
+
+[sub_resource type="Theme" id="Theme_7bbyy"]
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/colors/font_selected_color = Color(0, 0, 0, 0)
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
+RichTextLabel/colors/selection_color = Color(0.1, 0.1, 1, 0.8)
+RichTextLabel/colors/table_border = Color(0, 0, 0, 0)
+RichTextLabel/colors/table_even_row_bg = Color(0, 0, 0, 0)
+RichTextLabel/colors/table_odd_row_bg = Color(0, 0, 0, 0)
+RichTextLabel/constants/line_separation = 0
+RichTextLabel/constants/outline_size = 30
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/shadow_outline_size = 1
+RichTextLabel/constants/table_h_separation = 3
+RichTextLabel/constants/table_v_separation = 3
+RichTextLabel/constants/text_highlight_h_padding = 3
+RichTextLabel/constants/text_highlight_v_padding = 3
+RichTextLabel/font_sizes/bold_font_size = 96
+RichTextLabel/font_sizes/bold_italics_font_size = 96
+RichTextLabel/font_sizes/italics_font_size = 96
+RichTextLabel/font_sizes/mono_font_size = 96
+RichTextLabel/font_sizes/normal_font_size = 96
+RichTextLabel/fonts/bold_font = ExtResource("3_xlh6t")
+RichTextLabel/fonts/bold_italics_font = ExtResource("3_xlh6t")
+RichTextLabel/fonts/italics_font = ExtResource("3_xlh6t")
+RichTextLabel/fonts/mono_font = ExtResource("3_xlh6t")
+RichTextLabel/fonts/normal_font = ExtResource("3_xlh6t")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_8wakh")
+
+[sub_resource type="Theme" id="Theme_0jj44"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_ky4fw")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_qtwgq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
+custom_minimum_size = Vector2(270, 0)
+layout_mode = 2
+theme_override_constants/separation = 92
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="Control/CenterContainer/VBoxContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme = SubResource("Theme_7bbyy")
+text = "BangSak
+"
+fit_content = true
+
+[node name="Subtitle" type="RichTextLabel" parent="Control/CenterContainer/VBoxContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme = SubResource("Theme_7bbyy")
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/normal_font_size = 29
+bbcode_enabled = true
+text = "[center]Ang Laro ng mga pinoy[/center]"
+fit_content = true
+
+[node name="Buttons" type="VBoxContainer" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="CreateBtn" type="Button" parent="Control/CenterContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+theme = SubResource("Theme_0jj44")
+text = "Create Game"
+
+[node name="JoinBtn" type="Button" parent="Control/CenterContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Join Game"
+
+[node name="ExitBtn" type="Button" parent="Control/CenterContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Exit"
+
+[node name="accountBtn" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -78.0
+offset_top = -71.0
+offset_right = -34.0
+offset_bottom = -27.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("4_pavrp")
+texture_pressed = ExtResource("4_pavrp")
+texture_hover = ExtResource("5_3p6ak")
+ignore_texture_size = true
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+icon = ExtResource("4_pavrp")

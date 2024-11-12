@@ -1,0 +1,117 @@
+[gd_resource type="TileSet" load_steps=17 format=3 uid="uid://c3dt0gxlkadmw"]
+
+[ext_resource type="Texture2D" uid="uid://d3ssoeldoe5ea" path="res://assets/textures/Cute_Fantasy_Free/Tiles/Beach_Tile.png" id="1_lfh6e"]
+[ext_resource type="Texture2D" uid="uid://2ovac4utua6b" path="res://assets/textures/Cute_Fantasy_Free/Tiles/Cliff_Tile.png" id="2_12270"]
+[ext_resource type="Texture2D" uid="uid://c27suse5gytph" path="res://assets/textures/Cute_Fantasy_Free/Tiles/FarmLand_Tile.png" id="3_0bgdg"]
+[ext_resource type="Texture2D" uid="uid://d4ecyc2hif8h0" path="res://assets/textures/Cute_Fantasy_Free/Tiles/Grass_Middle.png" id="4_7dsmu"]
+[ext_resource type="Texture2D" uid="uid://cnx0tebkm2br4" path="res://assets/textures/Cute_Fantasy_Free/Tiles/Path_Middle.png" id="5_dt61o"]
+[ext_resource type="Texture2D" uid="uid://bp5p8xf1u4tyc" path="res://assets/textures/Cute_Fantasy_Free/Tiles/Path_Tile.png" id="6_k6yqe"]
+[ext_resource type="Texture2D" uid="uid://xfvjwvexyctm" path="res://assets/textures/Cute_Fantasy_Free/Tiles/Water_Middle.png" id="7_r3mr6"]
+[ext_resource type="Texture2D" uid="uid://du4my8cc8odb2" path="res://assets/textures/Cute_Fantasy_Free/Tiles/Water_Tile.png" id="8_kabtr"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e6fqy"]
+texture = ExtResource("1_lfh6e")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uw7t1"]
+texture = ExtResource("2_12270")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1pknu"]
+texture = ExtResource("3_0bgdg")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q5mah"]
+texture = ExtResource("4_7dsmu")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q1vqx"]
+texture = ExtResource("5_dt61o")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ffp1o"]
+texture = ExtResource("6_k6yqe")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i1otq"]
+texture = ExtResource("7_r3mr6")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1jukk"]
+texture = ExtResource("8_kabtr")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_e6fqy")
+sources/1 = SubResource("TileSetAtlasSource_uw7t1")
+sources/2 = SubResource("TileSetAtlasSource_1pknu")
+sources/3 = SubResource("TileSetAtlasSource_q5mah")
+sources/4 = SubResource("TileSetAtlasSource_q1vqx")
+sources/5 = SubResource("TileSetAtlasSource_ffp1o")
+sources/6 = SubResource("TileSetAtlasSource_i1otq")
+sources/7 = SubResource("TileSetAtlasSource_1jukk")
