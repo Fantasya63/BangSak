@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvh5rkujgm6rl"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_ugnac"]
+
+[sub_resource type="Theme" id="Theme_0jj44"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ugnac")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "BangSak
+"
+fit_content = true
+
+[node name="Buttons" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CreateBtn" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+theme = SubResource("Theme_0jj44")
+text = "Create Game"
+
+[node name="JoinBtn" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Join Game"
+
+[node name="ExitBtn" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Buttons/CreateBtn" to="." method="_on_create_btn_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Buttons/JoinBtn" to="." method="_on_join_btn_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Buttons/ExitBtn" to="." method="_on_exit_btn_pressed"]

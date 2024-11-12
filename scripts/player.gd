@@ -10,11 +10,20 @@ var anim_speed_scale := 0.01
 enum SPRITE_DIR { UP, DOWN, LEFT, RIGHT }
 var sprite_dir : SPRITE_DIR = SPRITE_DIR.DOWN
 
+@export var camera_prefab : PackedScene
+
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 
 func _ready(): 
 	anim.play("down_idle")
+	
+	if is_multiplayer_authority():
+		var cam = camera_prefab.instantiate()
+		add_child(cam)
+		
+	
+
 
 func _physics_process(delta):
 	if not is_multiplayer_authority():
