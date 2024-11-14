@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bw6viuij2kx0s"]
+[gd_scene load_steps=15 format=3 uid="uid://bw6viuij2kx0s"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_ky4fw"]
 [ext_resource type="FontFile" uid="uid://kb8pm310g163" path="res://assets/fonts/Montseratt/static/Montserrat-Bold.ttf" id="2_ylcoa"]
 [ext_resource type="FontFile" uid="uid://6r342ivmh023" path="res://assets/fonts/Quiapo/Quiapo_Free.ttf" id="3_xlh6t"]
 [ext_resource type="Texture2D" uid="uid://dxn3rir74cuat" path="res://assets/textures/gui/account_icon.svg" id="4_pavrp"]
 [ext_resource type="Texture2D" uid="uid://dwcwph7b6ocge" path="res://assets/textures/gui/account_icon_pressed.svg" id="5_3p6ak"]
+[ext_resource type="PackedScene" uid="uid://b0s62dm42825l" path="res://prefabs/GUI/popup_panel.tscn" id="6_p13v1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wok60"]
 content_margin_left = 4.0
@@ -108,6 +109,7 @@ RichTextLabel/styles/normal = SubResource("StyleBoxFlat_8wakh")
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_ky4fw")
+join_popup_path = NodePath("Control/PopupPanel")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -172,6 +174,7 @@ layout_mode = 2
 text = "Exit"
 
 [node name="accountBtn" type="TextureButton" parent="Control"]
+texture_filter = 2
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -189,8 +192,6 @@ texture_pressed = ExtResource("4_pavrp")
 texture_hover = ExtResource("5_3p6ak")
 ignore_texture_size = true
 
-[node name="Button" type="Button" parent="Control"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-icon = ExtResource("4_pavrp")
+[node name="PopupPanel" parent="Control" instance=ExtResource("6_p13v1")]
+
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Buttons/JoinBtn" to="." method="_on_join_btn_pressed"]

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rrqay"]
 [ext_resource type="PackedScene" uid="uid://blxdfhiey7v74" path="res://prefabs/follow_cam.tscn" id="2_ertm3"]
 [ext_resource type="Texture2D" uid="uid://bke7vtlcybvw7" path="res://assets/textures/BangSakTemps/Player/player2.png" id="3_df2s5"]
-[ext_resource type="Texture2D" uid="uid://j3130qub3iyn" path="res://assets/textures/BangSakTemps/Player/Player.png" id="4_i2j7q"]
+[ext_resource type="Texture2D" uid="uid://b6ixdjwvhauc6" path="res://assets/textures/BangSakTemps/Player/Player.png" id="4_i2j7q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x8emi"]
 atlas = ExtResource("1_a35tf")

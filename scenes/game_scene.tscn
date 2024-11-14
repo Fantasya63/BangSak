@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://djwi4jd3gw0"]
+
+[node name="GameScene" type="Node2D"]
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Environment"]

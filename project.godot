@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.3", "Mobile")
 [display]
 
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [input]
 

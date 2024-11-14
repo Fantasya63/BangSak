@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bke7vtlcybvw7" path="res://assets/textures/BangSakTemps/Player/player2.png" id="2_38bsk"]
 [ext_resource type="PackedScene" uid="uid://bw6viuij2kx0s" path="res://scenes/main_menu_gui.tscn" id="2_aori0"]
 [ext_resource type="TileSet" uid="uid://c3dt0gxlkadmw" path="res://assets/tilesets/ground.tres" id="2_s6lcm"]
-[ext_resource type="Script" path="res://scenes/animated_sprite_2d.gd" id="3_1rpdx"]
+[ext_resource type="Script" path="res://scripts/static_player_menu_anim.gd" id="3_1rpdx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_isjod"]
 atlas = ExtResource("2_38bsk")

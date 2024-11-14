@@ -1,4 +1,46 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c277i8863ij4c"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://c277i8863ij4c"]
+
+[ext_resource type="FontFile" uid="uid://kb8pm310g163" path="res://assets/fonts/Montseratt/static/Montserrat-Bold.ttf" id="1_l5lkg"]
+[ext_resource type="StyleBox" uid="uid://ckfb2kw6xsrq" path="res://themes/styles/panel.tres" id="1_r1656"]
+[ext_resource type="FontFile" uid="uid://d1k0j3gfvplen" path="res://assets/fonts/Inter/Inter-VariableFont_slnt,wght.ttf" id="2_m4yuq"]
+
+[sub_resource type="FontVariation" id="FontVariation_pjt5i"]
+base_font = ExtResource("2_m4yuq")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cr66"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.156863, 0.156863, 0.156863, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="FontVariation" id="FontVariation_bo6xa"]
+base_font = ExtResource("2_m4yuq")
+variation_opentype = {
+1936486004: 0,
+2003265652: 700
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2yd88"]
+bg_color = Color(0.266667, 0.341176, 0.454902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.156863, 0.156863, 0.156863, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="FontFile" id="FontFile_g3nem"]
 cache/0/16/0/ascent = 0.0
@@ -6,6 +48,25 @@ cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
 
 [resource]
 default_font = SubResource("FontFile_g3nem")
+HeaderLarge/colors/font_color = Color(0, 0, 0, 1)
+HeaderLarge/font_sizes/font_size = 26
+HeaderLarge/fonts/font = ExtResource("1_l5lkg")
+LineEdit/colors/caret_color = Color(0.156863, 0.156863, 0.156863, 1)
+LineEdit/colors/font_color = Color(0.156863, 0.156863, 0.156863, 1)
+LineEdit/colors/font_placeholder_color = Color(0.666667, 0.666667, 0.666667, 1)
+LineEdit/fonts/font = SubResource("FontVariation_pjt5i")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_3cr66")
+Panel/styles/panel = ExtResource("1_r1656")
+PopupButton/base_type = &"Button"
+PopupButton/font_sizes/font_size = 20
+PopupButton/fonts/font = SubResource("FontVariation_bo6xa")
+PopupButton/styles/normal = SubResource("StyleBoxFlat_2yd88")
+PopupPanel/styles/panel = ExtResource("1_r1656")
