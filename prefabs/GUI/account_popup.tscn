@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbybxorpqittp"]
+
+[ext_resource type="Theme" uid="uid://c277i8863ij4c" path="res://new_theme.tres" id="1_feavj"]
+[ext_resource type="Script" path="res://scripts/account_popup.gd" id="2_atbrh"]
+
+[node name="account_popup" type="PopupPanel"]
+initial_position = 1
+size = Vector2i(374, 169)
+visible = true
+theme = ExtResource("1_feavj")
+script = ExtResource("2_atbrh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 48.0
+offset_top = 22.0
+offset_right = 326.0
+offset_bottom = 147.0
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_feavj")
+theme_type_variation = &"HeaderLarge"
+text = "Account"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="UsernameEdit" type="LineEdit" parent="VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(278, 0)
+layout_mode = 2
+placeholder_text = "Username"
+max_length = 15
+caret_blink = true
+
+[node name="SaveBtn" type="Button" parent="VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme = ExtResource("1_feavj")
+theme_type_variation = &"PopupButton"
+text = "Save"
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/SaveBtn" to="." method="_on_save_btn_pressed"]

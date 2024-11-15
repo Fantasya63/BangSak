@@ -1,11 +1,11 @@
 [gd_resource type="Theme" load_steps=9 format=3 uid="uid://c277i8863ij4c"]
 
-[ext_resource type="FontFile" uid="uid://kb8pm310g163" path="res://assets/fonts/Montseratt/static/Montserrat-Bold.ttf" id="1_l5lkg"]
+[ext_resource type="FontFile" uid="uid://kb8pm310g163" path="res://fonts/Montseratt/static/Montserrat-Bold.ttf" id="1_3llhe"]
 [ext_resource type="StyleBox" uid="uid://ckfb2kw6xsrq" path="res://themes/styles/panel.tres" id="1_r1656"]
-[ext_resource type="FontFile" uid="uid://d1k0j3gfvplen" path="res://assets/fonts/Inter/Inter-VariableFont_slnt,wght.ttf" id="2_m4yuq"]
+[ext_resource type="FontFile" uid="uid://d1k0j3gfvplen" path="res://fonts/Inter/Inter-VariableFont_slnt,wght.ttf" id="2_iflhg"]
 
 [sub_resource type="FontVariation" id="FontVariation_pjt5i"]
-base_font = ExtResource("2_m4yuq")
+base_font = ExtResource("2_iflhg")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cr66"]
 content_margin_left = 16.0
@@ -24,7 +24,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="FontVariation" id="FontVariation_bo6xa"]
-base_font = ExtResource("2_m4yuq")
+base_font = ExtResource("2_iflhg")
 variation_opentype = {
 1936486004: 0,
 2003265652: 700
@@ -58,12 +58,13 @@ cache/0/20/0/scale = 1.0
 default_font = SubResource("FontFile_g3nem")
 HeaderLarge/colors/font_color = Color(0, 0, 0, 1)
 HeaderLarge/font_sizes/font_size = 26
-HeaderLarge/fonts/font = ExtResource("1_l5lkg")
+HeaderLarge/fonts/font = ExtResource("1_3llhe")
 LineEdit/colors/caret_color = Color(0.156863, 0.156863, 0.156863, 1)
 LineEdit/colors/font_color = Color(0.156863, 0.156863, 0.156863, 1)
 LineEdit/colors/font_placeholder_color = Color(0.666667, 0.666667, 0.666667, 1)
 LineEdit/fonts/font = SubResource("FontVariation_pjt5i")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_3cr66")
+Normal_Button/base_type = &"Button"
 Panel/styles/panel = ExtResource("1_r1656")
 PopupButton/base_type = &"Button"
 PopupButton/font_sizes/font_size = 20

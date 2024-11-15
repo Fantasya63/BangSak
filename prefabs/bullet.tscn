@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7q6iu7okvy5y"]
+
+[ext_resource type="Texture2D" uid="uid://bpgqrbo13bpdy" path="res://assets/textures/character/bullet.png" id="1_ud4uf"]
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_whhrs"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="3_hv45o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p77iq"]
+radius = 2.23607
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x6n3l"]
+radius = 3.0
+
+[node name="bullet" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_whhrs")
+dmg_hit_path = NodePath("Hitbox")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ud4uf")
+
+[node name="map_colider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p77iq")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("3_hv45o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_x6n3l")
