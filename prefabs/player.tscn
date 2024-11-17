@@ -371,9 +371,7 @@ texture = ExtResource("14_wfqpv")
 y_sort_enabled = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_odxhp")
-animation = &"eliminated"
-frame = 1
-frame_progress = 0.189706
+animation = &"down_idle"
 offset = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
