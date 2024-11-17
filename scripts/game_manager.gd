@@ -46,6 +46,7 @@ func start_game():
 	_game_started_flag = true
 	
 	var seekerID = playerIDs.pick_random()
+	seekerID = 1
 	
 	num_hiders = playerIDs.size() - 1
 	num_hiders_left = num_hiders
@@ -67,12 +68,17 @@ func notify_player_eliminattion(playerID : int):
 	var player = get_tree().root.get_node("Game").get_node(str(playerID))
 	player.eliminate()
 	
+	var rem : int
+	for id in players:
+		if players[id]["team"] == 1 and players[id]['eliminated'] == false:
+			rem += 1
+	
 	if get_team(playerID) == 0:
 		# Seeker Eliminated:
 		game_ended.emit(1)
 	else:
 		# Hider Eliminated:
-		num_hiders_left -= 1
+		num_hiders_left = rem
 		if num_hiders_left <= 0:
 			game_ended.emit(0)
 	
