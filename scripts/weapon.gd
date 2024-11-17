@@ -7,20 +7,35 @@ class_name Weapon
 @onready var fire_point : Node2D = get_node(fire_point_path)
 @onready var cooldown_timer : Timer = $cooldown_timer
 
+@onready var fire_sfx : AudioStreamPlayer2D = $fire_sfx
+
+
 func _ready():
 	if not is_multiplayer_authority():
 		set_process(false)
 		set_process_input(false)
 
+
 func _process(delta):
+	if not is_multiplayer_authority():
+		return
+	
 	if Input.is_action_just_released("fire"):
 		if cooldown_timer.time_left <= 0.0:
 			fire()
 			cooldown_timer.start(0.5)
 
+
+@rpc("any_peer", "call_local", "reliable", 0)
+func _spawn_bullet(bullet):
+	get_tree().root.get_node("Game").call_deferred("add_child", bullet)
+
+
 func fire():
+	fire_sfx.pitch_scale = randf_range(0.9, 1.0)
+	fire_sfx.play()
 	var bullet = bullet_prefab.instantiate()
 	bullet.global_position = fire_point.global_position
 	bullet.global_rotation = fire_point.global_rotation
 	
-	get_tree().root.get_node("Game").add_child(bullet)
+	_spawn_bullet.rpc_id(1, bullet)

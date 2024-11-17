@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://bvh5rkujgm6rl"]
+[gd_scene load_steps=29 format=4 uid="uid://bvh5rkujgm6rl"]
 
 [ext_resource type="Texture2D" uid="uid://d3ssoeldoe5ea" path="res://assets/textures/Cute_Fantasy_Free/Tiles/Beach_Tile.png" id="1_7g3wp"]
 [ext_resource type="Texture2D" uid="uid://bke7vtlcybvw7" path="res://assets/textures/BangSakTemps/Player/player2.png" id="2_38bsk"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bp5p8xf1u4tyc" path="res://assets/textures/Cute_Fantasy_Free/Tiles/Path_Tile.png" id="6_a6a0l"]
 [ext_resource type="Texture2D" uid="uid://xfvjwvexyctm" path="res://assets/textures/Cute_Fantasy_Free/Tiles/Water_Middle.png" id="7_5yw73"]
 [ext_resource type="Texture2D" uid="uid://du4my8cc8odb2" path="res://assets/textures/Cute_Fantasy_Free/Tiles/Water_Tile.png" id="8_2kdfn"]
+[ext_resource type="AudioStream" uid="uid://rf043pujxnci" path="res://music/Game_title_rock_wav.wav" id="12_5rnik"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e6fqy"]
 texture = ExtResource("1_7g3wp")
@@ -190,3 +191,7 @@ frame_progress = 0.30269
 script = ExtResource("3_1rpdx")
 
 [node name="GUI" parent="." instance=ExtResource("2_aori0")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_5rnik")
+autoplay = true

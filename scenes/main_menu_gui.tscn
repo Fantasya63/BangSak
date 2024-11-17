@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bw6viuij2kx0s"]
+[gd_scene load_steps=18 format=3 uid="uid://bw6viuij2kx0s"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_ky4fw"]
 [ext_resource type="FontFile" uid="uid://kb8pm310g163" path="res://fonts/Montseratt/static/Montserrat-Bold.ttf" id="2_ylcoa"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dwcwph7b6ocge" path="res://assets/textures/gui/account_icon_pressed.svg" id="5_3p6ak"]
 [ext_resource type="PackedScene" uid="uid://b0s62dm42825l" path="res://prefabs/GUI/popup_panel.tscn" id="6_p13v1"]
 [ext_resource type="PackedScene" uid="uid://dbybxorpqittp" path="res://prefabs/GUI/account_popup.tscn" id="7_qgwy6"]
+[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="8_7ioml"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wok60"]
 content_margin_left = 4.0
@@ -108,6 +109,11 @@ RichTextLabel/styles/normal = SubResource("StyleBoxFlat_8wakh")
 
 [sub_resource type="Theme" id="Theme_0jj44"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_661ae"]
+shader = ExtResource("8_7ioml")
+shader_parameter/outerRadius = 3.723
+shader_parameter/MainAlpha = 1.0
+
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_ky4fw")
 join_popup_path = NodePath("Control/PopupPanel")
@@ -197,6 +203,15 @@ ignore_texture_size = true
 [node name="PopupPanel" parent="Control" instance=ExtResource("6_p13v1")]
 
 [node name="account" parent="Control" instance=ExtResource("7_qgwy6")]
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_661ae")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Buttons/CreateBtn" to="." method="_on_create_btn_pressed"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Buttons/JoinBtn" to="." method="_on_join_btn_pressed"]

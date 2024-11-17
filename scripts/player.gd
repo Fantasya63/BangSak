@@ -1,12 +1,14 @@
 extends CharacterBody2D
 class_name Player
 
+@export_color_no_alpha var eliminated_color : Color
 
 @onready var anim : AnimatedSprite2D = $anim
 @onready var footstep_audio_timer : Timer = $footstepTimer
 
 @export_node_path("Label") var name_path
 @onready var nametag : Label = get_node(name_path)
+
 
 @onready var footstep_audios = [
 	$footstep/footstepAudio1,
@@ -16,7 +18,7 @@ class_name Player
 ]
 
 @export var walk_speed := 75.0
-@export var sprint_speed := 90.0
+@export var sprint_speed := 115.0
 @export_range(0.0, 1.0) var anim_speed_scale := 0.01
 @export var camera_prefab : PackedScene
 
@@ -28,27 +30,80 @@ var team : TEAM
 enum SPRITE_DIR { UP, DOWN, LEFT, RIGHT }
 var sprite_dir : SPRITE_DIR = SPRITE_DIR.DOWN
 var speed := 0.0
-
 var player_info 
+var eliminated := false
 
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 
 
-func _ready(): 
+func reset():
+	# Get team from manager
+	anim.play("down_idle")
+	team = GameManager.get_team(name.to_int())
+	
+	set_weapon()
+	pass
+
+
+func _ready():
+	GameManager.game_started.connect(_on_game_started)
+	
 	anim.play("down_idle")
 	
 	
 	if is_multiplayer_authority():
-		team = TEAM.SEEKER
 		var cam = camera_prefab.instantiate()
 		add_child(cam)
 	else:
-		team = TEAM.HIDER
+		$sight_cast.visible = false
+	
+	team = 0 if name.to_int() == 1 else 1
+	set_weapon()
+		
+	print_debug("Team: " + str(team) + " id: " + name)
+
+
+func _on_game_started():
+	reset()
+
+
+func set_weapon():
+	if team == 0:
+		# Seeker
+		var weapon = $weapon_holder/weapon
+		weapon.visible = true
+		weapon.set_process(true)
+		weapon.set_process_input(true)
+		weapon.set_process_unhandled_input(false)
+		
+		var slapper = $slapper
+		slapper.visible = false
+		slapper.set_process(false)
+		slapper.set_process_input(false)
+		slapper.set_process_unhandled_input(false)
+		
+	else:
+		# Hider
+		var weapon = $weapon_holder/weapon
+		weapon.visible = false
+		weapon.set_process(false)
+		weapon.set_process_input(false)
+		weapon.set_process_unhandled_input(false)
+		
+		var slapper = $slapper
+		slapper.visible = true
+		slapper.set_process(true)
+		slapper.set_process_input(true)
+		slapper.set_process_unhandled_input(true)
 
 
 func _physics_process(delta):
+	if GameManager.is_game_started():
+		if GameManager.players[name.to_int()]['eliminated'] == true:
+			eliminate()
+	
 	if speed > 0.0:
 		play_footstep()
 	
@@ -80,9 +135,10 @@ func _physics_process(delta):
 		else:
 			velocity = move_input * walk_speed
 	
-	
-	move_and_slide()
-	play_anim()
+	if not eliminated:
+		move_and_slide()
+		play_anim()
+
 
 func play_footstep():
 	if footstep_audio_timer.time_left <= 0:
@@ -133,3 +189,43 @@ func play_anim():
 				anim.play("side_walk")
 			else:
 				anim.play("side_idle")
+
+
+func disable_weapons():
+	var weapon = $weapon_holder/weapon
+	weapon.visible = false
+	weapon.set_process(false)
+	weapon.set_process_input(false)
+	weapon.set_process_unhandled_input(false)
+	
+	var slapper = $slapper
+	slapper.visible = false
+	slapper.set_process(false)
+	slapper.set_process_input(false)
+	slapper.set_process_unhandled_input(false)
+
+
+func _on_player_hitbox_on_bang_hit():
+	if team == GameManager.Seeker:
+		return
+	else:
+		GameManager.eliminate.rpc(name.to_int())
+		eliminate()
+
+
+func eliminate():
+	eliminated = true
+	set_process_input(false)
+	$CollisionShape2D.set_deferred("disabled", true)
+	$PlayerHitbox/CollisionShape2D.set_deferred("disabled", true)
+	anim.modulate = eliminated_color
+	anim.play("eliminated")
+	disable_weapons()
+
+
+func _on_player_hitbox_on_sak_hit():
+	if team == GameManager.Hider:
+		return
+	
+	GameManager.eliminate.rpc_id(1, name.to_int())
+	eliminate()

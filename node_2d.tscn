@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://3nqkcobguepx"]
+
+[ext_resource type="PackedScene" uid="uid://gbjkjwj50dbo" path="res://prefabs/player.tscn" id="1_lrbof"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_lrbof")]
+
+[node name="Camera2D" type="Camera2D" parent="."]

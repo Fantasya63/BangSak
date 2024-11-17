@@ -1,21 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://bs06pyoaxyhs5"]
+[gd_scene load_steps=7 format=3 uid="uid://bs06pyoaxyhs5"]
 
-[ext_resource type="Script" path="res://scripts/weapon.gd" id="1_k7j8f"]
-[ext_resource type="PackedScene" uid="uid://c7q6iu7okvy5y" path="res://prefabs/bullet.tscn" id="2_u34cl"]
-[ext_resource type="Texture2D" uid="uid://bx416osdd6e0a" path="res://assets/textures/character/finger gun..png" id="3_o4t8c"]
+[ext_resource type="Script" path="res://scripts/slapper.gd" id="1_2t1e7"]
+[ext_resource type="AudioStream" uid="uid://dbtlafyg2l7wv" path="res://sfx/hard-slap-46388.wav" id="3_f6arl"]
+[ext_resource type="Texture2D" uid="uid://can4ff4tm7irm" path="res://assets/textures/character/slap_hand.png" id="3_sd0bd"]
+[ext_resource type="PackedScene" uid="uid://du4dwjvuypi7b" path="res://hurtbox.tscn" id="5_irjwc"]
+[ext_resource type="Resource" uid="uid://dil3m66y6ydoq" path="res://data/SakAttack.tres" id="6_gg1yp"]
 
-[node name="weapon" type="Node2D"]
-script = ExtResource("1_k7j8f")
-fire_point_path = NodePath("fire_point")
-bullet_prefab = ExtResource("2_u34cl")
+[sub_resource type="CircleShape2D" id="CircleShape2D_d3i5g"]
+radius = 24.0
+
+[node name="slapper" type="Node2D"]
+script = ExtResource("1_2t1e7")
 
 [node name="cooldown_timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(8, 0)
-texture = ExtResource("3_o4t8c")
+position = Vector2(20, -32)
+rotation = 0.669582
+scale = Vector2(0.662664, 0.662664)
+texture = ExtResource("3_sd0bd")
 
-[node name="fire_point" type="Node2D" parent="."]
-position = Vector2(16, 0)
+[node name="fire_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_f6arl")
+
+[node name="Hurtbox" parent="." instance=ExtResource("5_irjwc")]
+attack = ExtResource("6_gg1yp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_d3i5g")
+disabled = true
+
+[connection signal="timeout" from="cooldown_timer" to="." method="_on_cooldown_timer_timeout"]

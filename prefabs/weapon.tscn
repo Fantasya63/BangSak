@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://qxtpwn7wpn0a"]
+[gd_scene load_steps=6 format=3 uid="uid://qxtpwn7wpn0a"]
 
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="1_v06xk"]
 [ext_resource type="PackedScene" uid="uid://c7q6iu7okvy5y" path="res://prefabs/bullet.tscn" id="2_i4cke"]
 [ext_resource type="Texture2D" uid="uid://bx416osdd6e0a" path="res://assets/textures/character/finger gun..png" id="2_lg0k4"]
+[ext_resource type="AudioStream" uid="uid://5nc2x0paxgtn" path="res://sfx/pew1.wav" id="4_5lm55"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kf8oi"]
+light_mode = 1
 
 [node name="weapon" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_v06xk")
 fire_point_path = NodePath("fire_point")
 bullet_prefab = ExtResource("2_i4cke")
@@ -14,8 +19,13 @@ wait_time = 0.2
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+material = SubResource("CanvasItemMaterial_kf8oi")
 position = Vector2(8, 0)
 texture = ExtResource("2_lg0k4")
 
 [node name="fire_point" type="Node2D" parent="."]
 position = Vector2(16, 0)
+
+[node name="fire_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_5lm55")

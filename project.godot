@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.3", "Mobile")
 [autoload]
 
 NetworkManager="*res://scripts/network_manager.gd"
+GameManager="*res://scripts/game_manager.gd"
 
 [display]
 
@@ -70,8 +71,11 @@ fire={
 2d_render/layer_1="Map"
 2d_render/layer_2="Player"
 2d_render/layer_3="Hurtbox"
+2d_render/layer_4="PlayerHitbox"
 2d_physics/layer_1="Map"
 2d_physics/layer_2="Player"
+2d_physics/layer_3="PlayerHitbox"
+2d_physics/layer_4="PlayerHurtbox"
 
 [rendering]
 

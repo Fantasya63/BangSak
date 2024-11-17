@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://c277i8863ij4c" path="res://new_theme.tres" id="1_flg3t"]
 [ext_resource type="Script" path="res://scripts/join_popup.gd" id="2_0g8l0"]
 
-[node name="PopupPanel" type="PopupPanel"]
+[node name="join_popup" type="PopupPanel"]
 title = "asda"
 initial_position = 1
 size = Vector2i(374, 169)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=49 format=3 uid="uid://gbjkjwj50dbo"]
+[gd_scene load_steps=57 format=3 uid="uid://gbjkjwj50dbo"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rrqay"]
 [ext_resource type="PackedScene" uid="uid://blxdfhiey7v74" path="res://prefabs/follow_cam.tscn" id="2_ertm3"]
+[ext_resource type="Texture2D" uid="uid://bke7vtlcybvw7" path="res://assets/textures/BangSakTemps/Player/player2.png" id="4_mw4qp"]
 [ext_resource type="Texture2D" uid="uid://ea5jq7843c6a" path="res://assets/textures/character/boy.png" id="4_pxakc"]
 [ext_resource type="AudioStream" uid="uid://cg77elo6s8lvo" path="res://sfx/151230__owlstorm__grassy-footstep-1.wav" id="6_u3xgf"]
 [ext_resource type="AudioStream" uid="uid://d2pkv83rc1bmq" path="res://sfx/151229__owlstorm__grassy-footstep-2.wav" id="7_trumr"]
@@ -9,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://qxtpwn7wpn0a" path="res://prefabs/weapon.tscn" id="8_q8b1p"]
 [ext_resource type="Script" path="res://prefabs/weapon_holder.gd" id="8_qrd5d"]
 [ext_resource type="AudioStream" uid="uid://0uo7pfjusn85" path="res://sfx/151235__owlstorm__grassy-footstep-4.wav" id="9_r7phn"]
+[ext_resource type="PackedScene" uid="uid://dfk1cx8jbqoac" path="res://prefabs/player_hitbox.tscn" id="10_0ihei"]
+[ext_resource type="PackedScene" uid="uid://bs06pyoaxyhs5" path="res://prefabs/slapper.tscn" id="12_qgeew"]
+[ext_resource type="Texture2D" uid="uid://bwyl1r8frq11t" path="res://assets/textures/light.png" id="14_wfqpv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gph3d"]
 atlas = ExtResource("4_pxakc")
@@ -57,6 +61,18 @@ region = Rect2(128, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4y4y4"]
 atlas = ExtResource("4_pxakc")
 region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvcbs"]
+atlas = ExtResource("4_mw4qp")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nufci"]
+atlas = ExtResource("4_mw4qp")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vd52x"]
+atlas = ExtResource("4_mw4qp")
+region = Rect2(64, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f6yv2"]
 atlas = ExtResource("4_pxakc")
@@ -204,6 +220,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_jvcbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nufci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vd52x")
+}],
+"loop": true,
+"name": &"eliminated",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_f6yv2")
 }, {
 "duration": 1.0,
@@ -295,9 +325,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ekq2b"]
-radius = 8.0
-height = 32.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_fj7q6"]
+radius = 6.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_poonq"]
 properties/0/path = NodePath(".:position")
@@ -312,32 +341,53 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath("weapon_holder:rotation")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath(".:team")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:eliminated")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0tbio"]
+radius = 9.0
+height = 32.0
 
 [node name="player" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 2
-collision_mask = 5
 script = ExtResource("1_rrqay")
+eliminated_color = Color(0.777344, 0.23381, 0.23381, 1)
 name_path = NodePath("nametag")
 anim_speed_scale = 0.25
 camera_prefab = ExtResource("2_ertm3")
 
+[node name="sight_cast" type="PointLight2D" parent="."]
+position = Vector2(0, -34)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("14_wfqpv")
+
 [node name="anim" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_odxhp")
-animation = &"up_walk"
-frame_progress = 0.957255
+animation = &"eliminated"
+frame = 1
+frame_progress = 0.189706
+offset = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
-shape = SubResource("CapsuleShape2D_ekq2b")
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_fj7q6")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_poonq")
 
 [node name="nametag" type="Label" parent="."]
 offset_left = -17.0
-offset_top = -23.0
+offset_top = -38.0
 offset_right = 62.0
+offset_bottom = -15.0
 scale = Vector2(0.431854, 0.431854)
 text = "username"
 horizontal_alignment = 1
@@ -348,25 +398,50 @@ wait_time = 0.5
 one_shot = true
 
 [node name="footstep" type="Node2D" parent="."]
+position = Vector2(0, -15)
 
 [node name="footstepAudio1" type="AudioStreamPlayer2D" parent="footstep"]
 stream = ExtResource("6_u3xgf")
 volume_db = 18.857
+attenuation = 2.21914
 
 [node name="footstepAudio2" type="AudioStreamPlayer2D" parent="footstep"]
 stream = ExtResource("7_trumr")
 volume_db = 18.857
+attenuation = 2.21914
 
 [node name="footstepAudio3" type="AudioStreamPlayer2D" parent="footstep"]
 stream = ExtResource("8_5pc0u")
 volume_db = 18.857
+attenuation = 2.21914
 
 [node name="footstepAudio4" type="AudioStreamPlayer2D" parent="footstep"]
 stream = ExtResource("9_r7phn")
 volume_db = 18.857
+attenuation = 2.21914
 
 [node name="weapon_holder" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -15)
 script = ExtResource("8_qrd5d")
 
 [node name="weapon" parent="weapon_holder" instance=ExtResource("8_q8b1p")]
-position = Vector2(20, 2.62268e-07)
+position = Vector2(12, 2.62268e-07)
+
+[node name="PlayerHitbox" parent="." instance=ExtResource("10_0ihei")]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitbox"]
+position = Vector2(0, -15)
+shape = SubResource("CapsuleShape2D_0tbio")
+
+[node name="slapper" parent="." instance=ExtResource("12_qgeew")]
+fire_point_path = NodePath("slap_point")
+
+[node name="slap_point" type="Node2D" parent="slapper"]
+position = Vector2(0, -15)
+
+[connection signal="body_entered" from="PlayerHitbox" to="." method="_on_player_hitbox_body_entered"]
+[connection signal="on_bang_hit" from="PlayerHitbox" to="." method="_on_player_hitbox_on_bang_hit"]
+[connection signal="on_sak_hit" from="PlayerHitbox" to="." method="_on_player_hitbox_on_sak_hit"]

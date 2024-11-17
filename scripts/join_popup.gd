@@ -7,10 +7,14 @@ extends PopupPanel
 var ip_regex = RegEx.new()
 
 func _ready():
+	if OS.is_debug_build():
+		ip_input.text = "127.0.0.1"
+	
 	# Compile the regular expression for IPv4
 	ip_regex.compile(r"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$")
 
 func _on_join_btn_pressed():
+	
 	if is_valid_ip(ip_input.text):
 		NetworkManager.join_game(ip_input.text)
 		NetworkManager.load_game("res://scenes/game_scene.tscn")

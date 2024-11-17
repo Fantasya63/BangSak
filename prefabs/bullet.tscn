@@ -1,19 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7q6iu7okvy5y"]
+[gd_scene load_steps=8 format=3 uid="uid://c7q6iu7okvy5y"]
 
 [ext_resource type="Texture2D" uid="uid://bpgqrbo13bpdy" path="res://assets/textures/character/bullet.png" id="1_ud4uf"]
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_whhrs"]
-[ext_resource type="Script" path="res://scripts/hitbox.gd" id="3_hv45o"]
+[ext_resource type="PackedScene" uid="uid://du4dwjvuypi7b" path="res://hurtbox.tscn" id="3_d814r"]
+[ext_resource type="Resource" uid="uid://b5i7wdat805ue" path="res://data/BulletAttack.tres" id="4_5hgai"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p77iq"]
 radius = 2.23607
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_x6n3l"]
-radius = 3.0
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ek4u8"]
+properties/0/path = NodePath(".:rotation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tl83"]
+radius = 4.0
 
 [node name="bullet" type="CharacterBody2D"]
-collision_layer = 0
+collision_mask = 3
 script = ExtResource("1_whhrs")
-dmg_hit_path = NodePath("Hitbox")
+initial_speed = 1200.0
+target_speed = 3000.0
+acceleration = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_ud4uf")
@@ -21,10 +32,11 @@ texture = ExtResource("1_ud4uf")
 [node name="map_colider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_p77iq")
 
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 3
-script = ExtResource("3_hv45o")
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ek4u8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("CircleShape2D_x6n3l")
+[node name="Hurtbox" parent="." instance=ExtResource("3_d814r")]
+attack = ExtResource("4_5hgai")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_6tl83")
