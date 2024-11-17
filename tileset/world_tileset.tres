@@ -1,9 +1,10 @@
-[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://beu0npov8vamw"]
+[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://beu0npov8vamw"]
 
 [ext_resource type="Texture2D" uid="uid://1k1tvn3ru4et" path="res://assets/textures/map/grass1.png" id="1_4hf7t"]
 [ext_resource type="Texture2D" uid="uid://ds14w2ur62h36" path="res://assets/textures/map/grass2.png" id="2_bomar"]
 [ext_resource type="Texture2D" uid="uid://51plfj4x84mt" path="res://assets/textures/map/house.png" id="3_kwb3j"]
 [ext_resource type="Texture2D" uid="uid://dwha0rumsjb7i" path="res://assets/textures/map/objects 1 updated.png" id="4_1tg32"]
+[ext_resource type="Texture2D" uid="uid://gq4rally50ks" path="res://assets/textures/map/store.png" id="5_5bjfn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ulav8"]
 texture = ExtResource("1_4hf7t")
@@ -136,6 +137,17 @@ texture = ExtResource("4_1tg32")
 1:12/0 = 0
 2:12/0 = 0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_iq1x3"]
+polygon = PackedVector2Array(-40, -68, -4, -103, 4, -103, 40, -68, 40, -39, 38, -37, 6, -70, 6, -73, 3, -77, -2, -77, -6, -73, -6, -70, -37, -37, -40, -38)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iguaq"]
+texture = ExtResource("5_5bjfn")
+3:1/size_in_atlas = Vector2i(5, 7)
+3:1/0 = 0
+3:1/0/texture_origin = Vector2i(0, 48)
+3:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_iq1x3")
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-38, -69, 36, -69, 37, 6, -36, 6)
+
 [resource]
 occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
@@ -147,3 +159,4 @@ sources/0 = SubResource("TileSetAtlasSource_ulav8")
 sources/1 = SubResource("TileSetAtlasSource_0u08f")
 sources/2 = SubResource("TileSetAtlasSource_vtvjy")
 sources/3 = SubResource("TileSetAtlasSource_lpnv7")
+sources/4 = SubResource("TileSetAtlasSource_iguaq")
