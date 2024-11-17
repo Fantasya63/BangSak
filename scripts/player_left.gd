@@ -16,8 +16,8 @@ func _on_game_started():
 	remaining_label.text = str(remaining) + "/" + str(total)
 	visible = true
 
-func _on_player_eliminated():
-	var remaining = GameManager.num_hiders_left
+func _on_player_eliminated(num_left : int):
+	var remaining = num_left
 	var total = GameManager.num_hiders
 	
 	remaining_label.text = str(remaining) + "/" + str(total)

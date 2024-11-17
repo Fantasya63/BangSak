@@ -36,6 +36,8 @@ func _on_game_started():
 	role_label.text = role_text
 	info_label.text = info_text % timer.time_left
 	visible = true
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

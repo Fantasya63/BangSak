@@ -1,21 +1,25 @@
-[gd_scene load_steps=17 format=4 uid="uid://djwi4jd3gw0"]
+[gd_scene load_steps=20 format=4 uid="uid://djwi4jd3gw0"]
 
 [ext_resource type="TileSet" uid="uid://beu0npov8vamw" path="res://tileset/world_tileset.tres" id="1_20bq2"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_xc528"]
 [ext_resource type="PackedScene" uid="uid://gbjkjwj50dbo" path="res://prefabs/player.tscn" id="2_1kymd"]
 [ext_resource type="Texture2D" uid="uid://d10xvntqh0kxj" path="res://assets/textures/map/object 3 updated.png" id="3_tyvjj"]
 [ext_resource type="Texture2D" uid="uid://dwha0rumsjb7i" path="res://assets/textures/map/objects 1 updated.png" id="4_7n7oi"]
+[ext_resource type="Theme" uid="uid://c4xb0yaplskum" path="res://themes/main_menu_gui.tres" id="4_axsw6"]
 [ext_resource type="Texture2D" uid="uid://csr6red30hlhu" path="res://assets/textures/map/objects 2 updated.png" id="5_in1x0"]
 [ext_resource type="Script" path="res://scripts/game_start_panel_seeker.gd" id="5_oakrp"]
 [ext_resource type="Theme" uid="uid://c277i8863ij4c" path="res://new_theme.tres" id="6_gpevo"]
 [ext_resource type="Script" path="res://scripts/player_left.gd" id="6_isrec"]
 [ext_resource type="Script" path="res://scripts/player_count.gd" id="7_nf8hy"]
+[ext_resource type="Script" path="res://scenes/panel.gd" id="8_n1nm8"]
 [ext_resource type="AudioStream" uid="uid://b5i2pxfkiu1tv" path="res://music/Ambience.mp3" id="10_cnonx"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6enfo"]
 properties/0/path = NodePath("/root/GameManager:players")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+
+[sub_resource type="Theme" id="Theme_vv5a6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_37yte"]
 texture = ExtResource("3_tyvjj")
@@ -251,6 +255,7 @@ theme_type_variation = &"HeaderMedium"
 text = "0"
 
 [node name="game_start_panel_seeker" type="Panel" parent="GUI"]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -282,6 +287,40 @@ offset_right = 158.0
 offset_bottom = 112.0
 grow_horizontal = 2
 text = "Please wait 30 seconds for others to hide"
+
+[node name="Panel" type="Panel" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_n1nm8")
+
+[node name="CenterContainer" type="CenterContainer" parent="GUI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_axsw6")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="GUI/Panel/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="GUI/Panel/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"GraphFrameTitleLabel"
+theme_override_font_sizes/font_size = 64
+text = "You Won!"
+horizontal_alignment = 1
+
+[node name="CreateBtn" type="Button" parent="GUI/Panel/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_vv5a6")
+text = "Play Again"
 
 [node name="Environment" type="Node2D" parent="."]
 y_sort_enabled = true

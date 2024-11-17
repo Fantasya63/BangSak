@@ -205,12 +205,6 @@ func disable_weapons():
 	slapper.set_process_unhandled_input(false)
 
 
-func _on_player_hitbox_on_bang_hit():
-	if team == GameManager.Seeker:
-		return
-	else:
-		GameManager.eliminate.rpc(name.to_int())
-		eliminate()
 
 
 func eliminate():
@@ -221,6 +215,14 @@ func eliminate():
 	anim.modulate = eliminated_color
 	anim.play("eliminated")
 	disable_weapons()
+
+
+func _on_player_hitbox_on_bang_hit():
+	if team == GameManager.Seeker:
+		return
+	else:
+		GameManager.eliminate.rpc_id(1, name.to_int())
+		eliminate()
 
 
 func _on_player_hitbox_on_sak_hit():
