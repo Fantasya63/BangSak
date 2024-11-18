@@ -17,6 +17,8 @@ var player_spawn_positions : Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print_debug(multiplayer.get_unique_id())
+	
 	GameManager.game_started.connect(_on_game_started)
 	player_spawn_positions = get_node(player_spawn_positions_path).get_children()
 	

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c2fhabppcvcki"]
+
+[node name="StaticBody2D" type="StaticBody2D"]
+collision_mask = 3
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PackedVector2Array(-270, -568, -182, -692, -12, -732, 88, -673, 202, -670, 316, -628, 371, -544, 416, -470, 432, -364, 444, -278, 452, -218, 458, -123, 483, -40, 489, 52, 430, 95, 367, 137, 325, 158, 291, 185, 268, 238, 256, 313, 253, 381, 235, 447, 235, 447, 166, 471, 76, 480, -3, 480, -77, 447, -104, 351, -114, 278, -121, 230, -143, 180, -159, 166, -513, 165, -513, 51, -528, 1, -580, -87, -661, -150, -727, -165, -718, -241, -555, -236, -547, -348, -284, -348, -266, -377)
+disabled = true
+metadata/_edit_lock_ = true

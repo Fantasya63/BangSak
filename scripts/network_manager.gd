@@ -122,3 +122,9 @@ func _on_server_disconnected():
 	multiplayer.multiplayer_peer = null
 	players.clear()
 	server_disconnected.emit()
+
+
+# ------------------------------------------------------------------------------------------------------------------------------------------
+@rpc("any_peer", "reliable", "call_local")
+func _request_spawn(spawn, path):
+	get_tree().root.get_node("Game").add_child(spawn)

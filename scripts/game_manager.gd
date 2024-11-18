@@ -64,6 +64,9 @@ func start_game():
 
 @rpc("any_peer", "call_local", "reliable", 0)
 func notify_player_eliminattion(playerID : int):
+	if playerID == get_tree().get_network_unique_id():
+		return
+	
 	players[playerID]['eliminated'] = true
 	var player = get_tree().root.get_node("Game").get_node(str(playerID))
 	player.eliminate()
@@ -84,6 +87,8 @@ func notify_player_eliminattion(playerID : int):
 	
 	on_player_eliminated.emit(num_hiders_left)
 
+
+# Server and Sender
 @rpc("any_peer", "call_local", "reliable", 0)
 func eliminate(playerID : int):
 	var stats : Dictionary = players[playerID]

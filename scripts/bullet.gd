@@ -26,8 +26,8 @@ func _physics_process(delta):
 	var collision = move_and_collide(velocity)
 	if collision:
 		queue_free()
-#
-#
+
+
 #func _on_hitbox_on_hitbox_collision(hitbox):
 	#if not hitbox.team == team:
 		#var attack := Attack.new()

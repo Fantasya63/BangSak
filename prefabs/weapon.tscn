@@ -24,8 +24,9 @@ material = SubResource("CanvasItemMaterial_kf8oi")
 position = Vector2(8, 0)
 texture = ExtResource("2_lg0k4")
 
-[node name="fire_point" type="Node2D" parent="."]
+[node name="fire_point" type="Marker2D" parent="."]
 position = Vector2(16, 0)
+gizmo_extents = 823.7
 
 [node name="fire_sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_5lm55")

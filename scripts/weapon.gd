@@ -32,10 +32,12 @@ func _spawn_bullet(bullet):
 
 
 func fire():
+	print_debug("Position: " + str(fire_point.global_position))
+	
 	fire_sfx.pitch_scale = randf_range(0.9, 1.0)
 	fire_sfx.play()
-	var bullet = bullet_prefab.instantiate()
+	var bullet : Bullet = bullet_prefab.instantiate()
 	bullet.global_position = fire_point.global_position
 	bullet.global_rotation = fire_point.global_rotation
 	
-	_spawn_bullet.rpc_id(1, bullet)
+	NetworkManager._request_spawn.rpc_id(1, bullet, "/root/Game")

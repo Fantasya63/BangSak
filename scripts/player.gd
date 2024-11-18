@@ -218,6 +218,9 @@ func eliminate():
 
 
 func _on_player_hitbox_on_bang_hit():
+	if not is_multiplayer_authority():
+		return
+	
 	if team == GameManager.Seeker:
 		return
 	else:
@@ -226,6 +229,9 @@ func _on_player_hitbox_on_bang_hit():
 
 
 func _on_player_hitbox_on_sak_hit():
+	if not is_multiplayer_authority():
+		return
+	
 	if team == GameManager.Hider:
 		return
 	
