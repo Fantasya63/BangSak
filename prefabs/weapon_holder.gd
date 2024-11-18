@@ -11,9 +11,9 @@ func _process(delta):
 	var pos = global_position
 	
 	var direction = (mouse_pos - pos).normalized()
-	if Vector2.RIGHT.dot(direction) < 0.0:
-		# Flip the sprite
-		pass 
+	#if Vector2.RIGHT.dot(direction) < 0.0:
+		## Flip the sprite
+		#pass 
 	
 	
 	look_at(mouse_pos)

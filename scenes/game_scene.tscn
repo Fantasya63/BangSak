@@ -67,7 +67,6 @@ animations = [{
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
-position = Vector2(25, -386)
 script = ExtResource("1_xc528")
 player_scene = ExtResource("2_1kymd")
 player_spawn_parent = NodePath(".")

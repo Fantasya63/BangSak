@@ -11,7 +11,7 @@ light_mode = 1
 [node name="weapon" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_v06xk")
-fire_point_path = NodePath("fire_point")
+fire_point_path = NodePath("fire")
 bullet_prefab = ExtResource("2_i4cke")
 
 [node name="cooldown_timer" type="Timer" parent="."]
@@ -24,9 +24,8 @@ material = SubResource("CanvasItemMaterial_kf8oi")
 position = Vector2(8, 0)
 texture = ExtResource("2_lg0k4")
 
-[node name="fire_point" type="Marker2D" parent="."]
-position = Vector2(16, 0)
-gizmo_extents = 823.7
-
 [node name="fire_sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_5lm55")
+
+[node name="fire" type="Node2D" parent="."]
+position = Vector2(16, -1)
