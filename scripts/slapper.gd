@@ -9,7 +9,7 @@ var eliminated = false
 @onready var fire_sfx : AudioStreamPlayer2D = $fire_sfx
 @onready var fire_point : Node2D = get_node(fire_point_path)
 
-@onready var hurt_collider = $Hurtbox/CollisionShape2D
+@onready var hurt_collider : CollisionShape2D = $Hurtbox/CollisionShape2D
 
 func _ready():
 	hurt_collider.global_position = fire_point.global_position

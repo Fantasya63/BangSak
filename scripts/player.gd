@@ -48,6 +48,9 @@ func reset():
 
 
 func _ready():
+	GameManager.on_player_attacked.connect(_on_player_attacked)
+	$PlayerHitbox.playerID = name.to_int()
+	
 	GameManager.game_started.connect(_on_game_started)
 	
 	anim.play("down_idle")
@@ -63,6 +66,11 @@ func _ready():
 	set_weapon()
 		
 	print_debug("Team: " + str(team) + " id: " + name)
+
+
+func _on_player_attacked(id : int):
+	if id == name.to_int():
+		eliminate()
 
 
 func _on_game_started():
@@ -134,10 +142,12 @@ func _physics_process(delta):
 			velocity = move_input * sprint_speed
 		else:
 			velocity = move_input * walk_speed
-	
-	if not eliminated:
+		
 		move_and_slide()
+		
+	if not eliminated:
 		play_anim()
+	
 
 
 func play_footstep():
@@ -205,8 +215,6 @@ func disable_weapons():
 	slapper.set_process_unhandled_input(false)
 
 
-
-
 func eliminate():
 	eliminated = true
 	set_process_input(false)
@@ -215,25 +223,3 @@ func eliminate():
 	anim.modulate = eliminated_color
 	anim.play("eliminated")
 	disable_weapons()
-
-
-func _on_player_hitbox_on_bang_hit():
-	if not is_multiplayer_authority():
-		return
-	
-	if team == GameManager.Seeker:
-		return
-	else:
-		GameManager.eliminate.rpc_id(1, name.to_int())
-		eliminate()
-
-
-func _on_player_hitbox_on_sak_hit():
-	if not is_multiplayer_authority():
-		return
-	
-	if team == GameManager.Hider:
-		return
-	
-	GameManager.eliminate.rpc_id(1, name.to_int())
-	eliminate()

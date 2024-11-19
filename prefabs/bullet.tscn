@@ -20,8 +20,7 @@ properties/1/replication_mode = 1
 radius = 4.0
 
 [node name="bullet" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 4
+collision_layer = 16
 script = ExtResource("1_whhrs")
 initial_speed = 1200.0
 target_speed = 3000.0
@@ -41,3 +40,5 @@ attack = ExtResource("4_5hgai")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_6tl83")
+
+[connection signal="on_hitbox_hurt" from="Hurtbox" to="." method="_on_hurtbox_on_hitbox_hurt"]

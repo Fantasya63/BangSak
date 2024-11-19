@@ -125,6 +125,3 @@ func _on_server_disconnected():
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------
-@rpc("any_peer", "reliable", "call_local")
-func _request_spawn(spawn, path):
-	get_tree().root.get_node("Game").add_child(spawn)

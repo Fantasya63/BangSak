@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bs06pyoaxyhs5"]
+[gd_scene load_steps=8 format=3 uid="uid://bs06pyoaxyhs5"]
 
 [ext_resource type="Script" path="res://scripts/slapper.gd" id="1_2t1e7"]
 [ext_resource type="AudioStream" uid="uid://dbtlafyg2l7wv" path="res://sfx/hard-slap-46388.wav" id="3_f6arl"]
@@ -8,6 +8,11 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d3i5g"]
 radius = 24.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v2hs1"]
+properties/0/path = NodePath("Hurtbox/CollisionShape2D:disabled")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [node name="slapper" type="Node2D"]
 script = ExtResource("1_2t1e7")
@@ -32,5 +37,8 @@ attack = ExtResource("6_gg1yp")
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_d3i5g")
 disabled = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_v2hs1")
 
 [connection signal="timeout" from="cooldown_timer" to="." method="_on_cooldown_timer_timeout"]

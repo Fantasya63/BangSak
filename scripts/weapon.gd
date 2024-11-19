@@ -37,8 +37,9 @@ func fire():
 	fire_sfx.pitch_scale = randf_range(0.9, 1.0)
 	fire_sfx.play()
 	
-	var bullet : Bullet = bullet_prefab.instantiate()
-	bullet.global_position = fire_point.global_position
-	bullet.global_rotation = fire_point.global_rotation
-	get_tree().root.get_node("Game").add_child(bullet)
+	#var bullet : Bullet = bullet_prefab.instantiate()
+	#bullet.set_multiplayer_authority(multiplayer.get_unique_id())
+	#bullet.global_position = fire_point.global_position
+	#bullet.global_rotation = fire_point.global_rotation
+	GameManager.request_spawn.rpc_id(1, bullet_prefab, multiplayer.get_unique_id(), fire_point.global_position, fire_point.global_rotation)
 	#NetworkManager._request_spawn.rpc_id(1, bullet, "/root/Game")

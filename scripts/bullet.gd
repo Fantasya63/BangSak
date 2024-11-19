@@ -33,3 +33,7 @@ func _physics_process(delta):
 		#var attack := Attack.new()
 		#attack.attack_type = Attack.ATTACK_TYPE.Bang
 		#hitbox.do_attack(attack)
+
+
+func _on_hurtbox_on_hitbox_hurt():
+	call_deferred("queue_free")
