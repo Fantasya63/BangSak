@@ -1,7 +1,8 @@
-[gd_scene load_steps=57 format=3 uid="uid://gbjkjwj50dbo"]
+[gd_scene load_steps=58 format=3 uid="uid://gbjkjwj50dbo"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rrqay"]
 [ext_resource type="PackedScene" uid="uid://blxdfhiey7v74" path="res://prefabs/follow_cam.tscn" id="2_ertm3"]
+[ext_resource type="PackedScene" uid="uid://btauskereh441" path="res://prefabs/shake.tscn" id="3_150ov"]
 [ext_resource type="Texture2D" uid="uid://bke7vtlcybvw7" path="res://assets/textures/BangSakTemps/Player/player2.png" id="4_mw4qp"]
 [ext_resource type="Texture2D" uid="uid://ea5jq7843c6a" path="res://assets/textures/character/boy.png" id="4_pxakc"]
 [ext_resource type="AudioStream" uid="uid://cg77elo6s8lvo" path="res://sfx/151230__owlstorm__grassy-footstep-1.wav" id="6_u3xgf"]
@@ -347,6 +348,12 @@ properties/4/replication_mode = 2
 properties/5/path = NodePath(".:eliminated")
 properties/5/spawn = true
 properties/5/replication_mode = 1
+properties/6/path = NodePath("shake:offset")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("shake:zoom")
+properties/7/spawn = true
+properties/7/replication_mode = 1
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0tbio"]
 radius = 9.0
@@ -361,18 +368,18 @@ name_path = NodePath("nametag")
 anim_speed_scale = 0.25
 camera_prefab = ExtResource("2_ertm3")
 
-[node name="sight_cast" type="PointLight2D" parent="."]
-position = Vector2(-39, -29)
-blend_mode = 2
-shadow_enabled = true
-texture = ExtResource("14_wfqpv")
-
 [node name="anim" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_odxhp")
 animation = &"down_idle"
 offset = Vector2(0, -15)
+
+[node name="sight_cast" type="PointLight2D" parent="."]
+position = Vector2(-46, -28)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("14_wfqpv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -394,6 +401,8 @@ metadata/_edit_use_anchors_ = true
 [node name="footstepTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="shake" parent="." instance=ExtResource("3_150ov")]
 
 [node name="footstep" type="Node2D" parent="."]
 position = Vector2(0, -15)
