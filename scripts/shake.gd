@@ -18,12 +18,12 @@ func _ready():
 	var current_node = self  # This is where you are currently
 	var player_node = current_node.get_parent() # Navigate to the player node
 	player_id = str(player_node.name)
+	print("ID : " + player_id)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
 	if root.get_node("Game").get_node(player_id).eliminated:
-		print("HEHE")
 		apply_shake()
 	
 	#if Input.is_action_just_pressed("fire"):
