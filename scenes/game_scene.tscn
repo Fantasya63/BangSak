@@ -357,7 +357,7 @@ position = Vector2(99, -54)
 position = Vector2(160, -179)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.380905, 0.446582, 0.621094, 1)
+color = Color(0.24353, 0.298705, 0.445313, 1)
 
 [node name="chicken" type="AnimatedSprite2D" parent="."]
 position = Vector2(381, -218)

@@ -6,7 +6,8 @@ var players : Dictionary = {
 	# ID, #GameStat
 }
 
-
+#Debug
+signal on_debug_rpc(sender: int)
 
 var num_hiders : int 
 var num_hiders_left : int
@@ -48,10 +49,10 @@ func start_game():
 	
 	
 	var seekerID = playerIDs.pick_random()
-	#while seekerID == 1:
-		#seekerID = playerIDs.pick_random()
-		#
-	seekerID = 1
+	while seekerID == 1:
+		seekerID = playerIDs.pick_random()
+		
+	#seekerID = 1
 	
 	num_hiders = playerIDs.size() - 1
 	num_hiders_left = num_hiders
@@ -154,8 +155,6 @@ func _notify_player_attacked(playerID : int):
 # Anyone can call but only the server will execute
 @rpc("any_peer","call_local", "reliable")
 func attack_player(attack : Attack, id : int):
-	
-	
 	match attack.type:
 		0:
 			var _team = get_team(id)
@@ -190,6 +189,44 @@ func attack_player(attack : Attack, id : int):
 #
 		#Attack.Stun:
 			#pass
+
+signal on_rpc_player_has_attacked(id : int)
+@rpc("authority", "call_remote", "reliable")
+func rpc_notify_player_has_attacked():
+	pass
+
+
+# Call on every peer
+# WARNING! DO NOT SEND DATA THROUGH RPC
+# IDK WHY BUT ITS NOT WORKING! Maybe its just sending the ref of it? 
+@rpc("any_peer", "call_remote", "reliable")
+func rpc_on_player_fire():
+	var senderID = multiplayer.get_remote_sender_id()
+	
+	var player : Player = get_tree().root.get_node("Game").get_node(str(senderID))
+	if player:
+		player.rpc_fire()
+	
+	if OS.is_debug_build():
+		on_debug_rpc.emit(multiplayer.get_remote_sender_id())
+
+
+
+# Call on every peer
+# WARNING! DO NOT SEND DATA THROUGH RPC
+# IDK WHY BUT ITS NOT WORKING! Maybe its just sending the ref of it? 
+#@rpc("any_peer", "call_local", "reliable")
+#func rpc_debug():
+	#if not multiplayer.is_server():
+		#return
+	#
+	#var senderID = multiplayer.get_remote_sender_id()
+	#var player : Player = get_tree().root.get_node("Game").get_node(str(senderID))
+	#player.rpc_fire()
+	#
+	#if OS.is_debug_build():
+		#on_debug_rpc.emit(multiplayer.get_remote_sender_id())
+
 
 @rpc("any_peer", "call_local", "reliable")
 func request_spawn(prefab : PackedScene, id : int, pos : Vector2, rot : float):

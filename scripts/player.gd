@@ -2,7 +2,6 @@ extends CharacterBody2D
 class_name Player
 
 @export_color_no_alpha var eliminated_color : Color
-
 @onready var anim : AnimatedSprite2D = $anim
 @onready var footstep_audio_timer : Timer = $footstepTimer
 
@@ -17,11 +16,16 @@ class_name Player
 	$footstep/footstepAudio4,
 ]
 
+@onready var weapons = [
+	$weapons/bang_holder/bang,
+	$weapons/sak,
+]
+@onready var current_weapon : BaseWeapon = weapons[0]
+
 @export var walk_speed := 75.0
 @export var sprint_speed := 115.0
 @export_range(0.0, 1.0) var anim_speed_scale := 0.01
 @export var camera_prefab : PackedScene
-
 
 
 enum TEAM { SEEKER, HIDER }
@@ -36,25 +40,17 @@ var eliminated := false
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
-
-
-func reset():
-	# Get team from manager
-	anim.play("down_idle")
-	team = GameManager.get_team(name.to_int())
 	
-	set_weapon()
-	pass
 
 
 func _ready():
 	GameManager.on_player_attacked.connect(_on_player_attacked)
-	$PlayerHitbox.playerID = name.to_int()
-	
 	GameManager.game_started.connect(_on_game_started)
-	
+	$PlayerHitbox.playerID = name.to_int()
 	anim.play("down_idle")
 	
+	for weapon : BaseWeapon in weapons:
+		weapon.disable()
 	
 	if is_multiplayer_authority():
 		var cam = camera_prefab.instantiate()
@@ -64,47 +60,39 @@ func _ready():
 	
 	team = 0 if name.to_int() == 1 else 1
 	set_weapon()
-		
+	
 	print_debug("Team: " + str(team) + " id: " + name)
 
 
+# resets the playey to be ready to start another game
+func reset():
+	# Get team from manager
+	anim.play("down_idle")
+	team = GameManager.get_team(name.to_int())
+	set_weapon()
+
+
+# called by the game manager when a player is attacked
 func _on_player_attacked(id : int):
 	if id == name.to_int():
 		eliminate()
 
 
+# Called by the game manager when the game is started
 func _on_game_started():
 	reset()
 
 
+# Set the weapon to use with the set player team
+# must set the team to desired value first before calling this
 func set_weapon():
-	if team == 0:
-		# Seeker
-		var weapon = $weapon_holder/weapon
-		weapon.visible = true
-		weapon.set_process(true)
-		weapon.set_process_input(true)
-		weapon.set_process_unhandled_input(false)
-		
-		var slapper = $slapper
-		slapper.visible = false
-		slapper.set_process(false)
-		slapper.set_process_input(false)
-		slapper.set_process_unhandled_input(false)
-		
-	else:
-		# Hider
-		var weapon = $weapon_holder/weapon
-		weapon.visible = false
-		weapon.set_process(false)
-		weapon.set_process_input(false)
-		weapon.set_process_unhandled_input(false)
-		
-		var slapper = $slapper
-		slapper.visible = true
-		slapper.set_process(true)
-		slapper.set_process_input(true)
-		slapper.set_process_unhandled_input(true)
+	# Disable current weapon if there is
+	if current_weapon:
+		current_weapon.disable()
+	
+	# Get new weapon and enable it
+	current_weapon = weapons[team]
+	current_weapon.enable()
 
 
 func _physics_process(delta):
@@ -201,18 +189,21 @@ func play_anim():
 				anim.play("side_idle")
 
 
+# Disables all the weapons
 func disable_weapons():
-	var weapon = $weapon_holder/weapon
-	weapon.visible = false
-	weapon.set_process(false)
-	weapon.set_process_input(false)
-	weapon.set_process_unhandled_input(false)
-	
-	var slapper = $slapper
-	slapper.visible = false
-	slapper.set_process(false)
-	slapper.set_process_input(false)
-	slapper.set_process_unhandled_input(false)
+	for weapon : BaseWeapon in weapons:
+		weapon.disable()
+
+
+func _input(event):
+	if OS.is_debug_build():
+		if event.is_action_pressed("debug_rpc"):
+			GameManager.rpc_debug.rpc()
+
+
+func rpc_fire():
+	current_weapon.rpc_apply_fire()
+	print_debug("Debug RPC FIRE")
 
 
 func eliminate():

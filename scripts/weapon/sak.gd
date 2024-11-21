@@ -1,17 +1,15 @@
-extends Node2D
+extends BaseWeapon
 class_name Slapper
 
-@export_node_path("Node2D") var fire_point_path
+
 var eliminated = false
-
 @export var attack_range := 16.0
-@onready var cooldown_timer : Timer = $cooldown_timer
-@onready var fire_sfx : AudioStreamPlayer2D = $fire_sfx
-@onready var fire_point : Node2D = get_node(fire_point_path)
-
 @onready var hurt_collider : CollisionShape2D = $Hurtbox/CollisionShape2D
 
+
 func _ready():
+	super._ready()
+	
 	hurt_collider.global_position = fire_point.global_position
 	hurt_collider.set_deferred("disabled", true)
 	
@@ -43,8 +41,7 @@ func fire():
 	fire_sfx.play()
 	
 	hurt_collider.set_deferred("disabled", false)
-	
-	
+
 
 
 func _on_cooldown_timer_timeout():
