@@ -1,5 +1,8 @@
-[gd_scene format=3 uid="uid://blxdfhiey7v74"]
+[gd_scene load_steps=2 format=3 uid="uid://blxdfhiey7v74"]
+
+[ext_resource type="Script" path="res://scripts/shake.gd" id="1_d1tdi"]
 
 [node name="Camera2D" type="Camera2D"]
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
+script = ExtResource("1_d1tdi")

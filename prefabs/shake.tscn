@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://btauskereh441"]
+
+[ext_resource type="Script" path="res://scripts/shake.gd" id="1_oe6gt"]
+
+[node name="shake" type="Camera2D"]
+zoom = Vector2(2, 2)
+script = ExtResource("1_oe6gt")
