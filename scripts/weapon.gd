@@ -32,7 +32,7 @@ func _spawn_bullet(bullet):
 
 
 func fire():
-	print_debug("Position: " + str(fire_point.global_position))
+	#print_debug("Position: " + str(fire_point.global_position))
 	
 	fire_sfx.pitch_scale = randf_range(0.9, 1.0)
 	fire_sfx.play()

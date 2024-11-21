@@ -48,24 +48,25 @@ func reset():
 
 
 func _ready():
+	#print("SHAKE : ", shake)
 	GameManager.on_player_attacked.connect(_on_player_attacked)
 	$PlayerHitbox.playerID = name.to_int()
 	
 	GameManager.game_started.connect(_on_game_started)
 	
 	anim.play("down_idle")
-	
-	
+		
 	if is_multiplayer_authority():
 		var cam = camera_prefab.instantiate()
+		cam.name = "shake"
 		add_child(cam)
 	else:
 		$sight_cast.visible = false
-	
+		
 	team = 0 if name.to_int() == 1 else 1
 	set_weapon()
-		
-	print_debug("Team: " + str(team) + " id: " + name)
+	print_debug("childrens : ", get_children(), "id : " , name, "Camera : ", $shake)
+	#print_debug("Team: " + str(team) + " id: " + name)
 
 
 func _on_player_attacked(id : int):
@@ -110,6 +111,8 @@ func set_weapon():
 func _physics_process(delta):
 	if GameManager.is_game_started():
 		if GameManager.players[name.to_int()]['eliminated'] == true:
+			if $shake:
+				$shake.apply_shake()
 			eliminate()
 	
 	if speed > 0.0:
