@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bw6viuij2kx0s"]
+[gd_scene load_steps=19 format=3 uid="uid://bw6viuij2kx0s"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_ky4fw"]
 [ext_resource type="FontFile" uid="uid://kb8pm310g163" path="res://fonts/Montseratt/static/Montserrat-Bold.ttf" id="2_ylcoa"]
@@ -73,6 +73,27 @@ Button/styles/hover = SubResource("StyleBoxFlat_gbdiw")
 Button/styles/normal = SubResource("StyleBoxFlat_8xc6s")
 Button/styles/pressed = SubResource("StyleBoxFlat_8xc6s")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7hsub"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wakh"]
 bg_color = Color(0, 0, 0, 0)
 draw_center = false
@@ -87,7 +108,7 @@ RichTextLabel/colors/table_border = Color(0, 0, 0, 0)
 RichTextLabel/colors/table_even_row_bg = Color(0, 0, 0, 0)
 RichTextLabel/colors/table_odd_row_bg = Color(0, 0, 0, 0)
 RichTextLabel/constants/line_separation = 0
-RichTextLabel/constants/outline_size = 30
+RichTextLabel/constants/outline_size = 60
 RichTextLabel/constants/shadow_offset_x = 1
 RichTextLabel/constants/shadow_offset_y = 1
 RichTextLabel/constants/shadow_outline_size = 1
@@ -95,16 +116,17 @@ RichTextLabel/constants/table_h_separation = 3
 RichTextLabel/constants/table_v_separation = 3
 RichTextLabel/constants/text_highlight_h_padding = 3
 RichTextLabel/constants/text_highlight_v_padding = 3
-RichTextLabel/font_sizes/bold_font_size = 96
+RichTextLabel/font_sizes/bold_font_size = 120
 RichTextLabel/font_sizes/bold_italics_font_size = 96
 RichTextLabel/font_sizes/italics_font_size = 96
 RichTextLabel/font_sizes/mono_font_size = 96
-RichTextLabel/font_sizes/normal_font_size = 96
+RichTextLabel/font_sizes/normal_font_size = 350
 RichTextLabel/fonts/bold_font = ExtResource("3_xlh6t")
 RichTextLabel/fonts/bold_italics_font = ExtResource("3_xlh6t")
 RichTextLabel/fonts/italics_font = ExtResource("3_xlh6t")
 RichTextLabel/fonts/mono_font = ExtResource("3_xlh6t")
 RichTextLabel/fonts/normal_font = ExtResource("3_xlh6t")
+RichTextLabel/styles/focus = SubResource("StyleBoxFlat_7hsub")
 RichTextLabel/styles/normal = SubResource("StyleBoxFlat_8wakh")
 
 [sub_resource type="Theme" id="Theme_0jj44"]
@@ -128,16 +150,21 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -140.0
+offset_right = -26.0
+offset_bottom = 181.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_qtwgq")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
-custom_minimum_size = Vector2(270, 0)
+custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
 theme_override_constants/separation = 92
 alignment = 1
@@ -149,21 +176,12 @@ layout_mode = 2
 clip_contents = false
 layout_mode = 2
 theme = SubResource("Theme_7bbyy")
-text = "BangSak
+text = "BangSaK
 "
 fit_content = true
 
-[node name="Subtitle" type="RichTextLabel" parent="Control/CenterContainer/VBoxContainer/VBoxContainer"]
-clip_contents = false
-layout_mode = 2
-theme = SubResource("Theme_7bbyy")
-theme_override_constants/outline_size = 16
-theme_override_font_sizes/normal_font_size = 29
-bbcode_enabled = true
-text = "[center]Ang Laro ng mga pinoy[/center]"
-fit_content = true
-
 [node name="Buttons" type="VBoxContainer" parent="Control/CenterContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 8
@@ -181,7 +199,20 @@ text = "Join Game"
 layout_mode = 2
 text = "Exit"
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="Control/CenterContainer/VBoxContainer/VBoxContainer2"]
+clip_contents = false
+layout_mode = 2
+theme = SubResource("Theme_7bbyy")
+bbcode_enabled = true
+text = "[b] Ang LARO NG MGA PINOY
+[/b]"
+fit_content = true
+
 [node name="accountBtn" type="TextureButton" parent="Control"]
+visible = false
 texture_filter = 2
 layout_mode = 1
 anchors_preset = 3
@@ -201,8 +232,10 @@ texture_hover = ExtResource("5_3p6ak")
 ignore_texture_size = true
 
 [node name="PopupPanel" parent="Control" instance=ExtResource("6_p13v1")]
+visible = false
 
 [node name="account" parent="Control" instance=ExtResource("7_qgwy6")]
+visible = false
 
 [node name="Panel" type="Panel" parent="."]
 material = SubResource("ShaderMaterial_661ae")

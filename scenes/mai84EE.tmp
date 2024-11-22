@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=4 uid="uid://bvh5rkujgm6rl"]
+[gd_scene load_steps=7 format=4 uid="uid://bvh5rkujgm6rl"]
 
-[ext_resource type="Script" path="res://scenes/film.gd" id="1_mxvc2"]
 [ext_resource type="PackedScene" uid="uid://bw6viuij2kx0s" path="res://scenes/main_menu_gui.tscn" id="2_aori0"]
 [ext_resource type="TileSet" uid="uid://beu0npov8vamw" path="res://tileset/world_tileset.tres" id="3_f3l0l"]
 [ext_resource type="TileSet" uid="uid://bh73rcmeqw036" path="res://tileset/undergrowth.tres" id="4_46rge"]
-[ext_resource type="PackedScene" uid="uid://c0m4k7lfka5im" path="res://prefabs/lenga.tscn" id="5_qnuqd"]
 [ext_resource type="AudioStream" uid="uid://rf043pujxnci" path="res://music/Game_title_rock_wav.wav" id="12_5rnik"]
 
 [sub_resource type="Gradient" id="Gradient_b8vbw"]
@@ -20,38 +18,12 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Background" type="Node2D" parent="."]
 
-[node name="runner" parent="Background" instance=ExtResource("5_qnuqd")]
-position = Vector2(-187, -150)
-anim_type = "boy_run_side"
-flip = true
-
-[node name="runner3" parent="Background" instance=ExtResource("5_qnuqd")]
-position = Vector2(-93, -120)
-anim_type = "boy_run_side"
-flip = true
-
 [node name="Camera2D" type="Camera2D" parent="Background"]
 position = Vector2(-13, -80)
 zoom = Vector2(2, 2)
-script = ExtResource("1_mxvc2")
-
-[node name="throw" parent="Background" instance=ExtResource("5_qnuqd")]
-position = Vector2(145, 15)
-anim_type = "boy_hit_side"
-
-[node name="throw2" parent="Background" instance=ExtResource("5_qnuqd")]
-position = Vector2(174, 12)
-animation = &"boy_hurt_front"
-anim_type = "boy_hurt_side"
-flip = true
-metadata/_edit_group_ = true
-
-[node name="throw3" parent="Background" instance=ExtResource("5_qnuqd")]
-position = Vector2(-148, -123)
-anim_type = "girl_run_side"
-flip = true
 
 [node name="Environment" type="Node2D" parent="Background"]
+visible = false
 y_sort_enabled = true
 
 [node name="ground" type="TileMapLayer" parent="Background/Environment"]
@@ -104,27 +76,11 @@ texture = SubResource("GradientTexture2D_38mw6")
 [node name="StaticBody2D" type="StaticBody2D" parent="Background/Environment"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Environment/StaticBody2D"]
-position = Vector2(-136, -102)
 build_mode = 1
 polygon = PackedVector2Array(-270, -568, -162, -648, -12, -732, 88, -673, 202, -670, 316, -628, 371, -544, 416, -470, 413, -368, 425, -285, 452, -218, 458, -123, 483, -40, 489, 52, 430, 95, 367, 137, 298, 142, 254, 163, 256, 230, 256, 313, 253, 381, 235, 447, 235, 447, 166, 471, 76, 480, -3, 480, -77, 447, -104, 351, -114, 278, -121, 230, -143, 180, -159, 166, -513, 165, -513, 51, -528, 1, -580, -87, -661, -150, -727, -165, -718, -241, -555, -236, -547, -348, -284, -348, -266, -377)
 
-[node name="sit" parent="." instance=ExtResource("5_qnuqd")]
-position = Vector2(-9, -59)
-animation = &"boy_hit_side"
-anim_type = "girl_hurt_front"
-flip = true
-
-[node name="sit" parent="sit" instance=ExtResource("5_qnuqd")]
-position = Vector2(116, 107)
-animation = &"boy_hit_side"
-anim_type = "girl_idle_side"
-
-[node name="sit2" parent="sit" instance=ExtResource("5_qnuqd")]
-position = Vector2(-264, 34)
-animation = &"boy_hit_side"
-anim_type = "girl_idle_side"
-
 [node name="GUI" parent="." instance=ExtResource("2_aori0")]
+visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_5rnik")

@@ -1,9 +1,10 @@
 extends AnimatedSprite2D
-
-
+@export var anim_type = "default"
+@export var flip = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	play("default")
+	flip_h = flip
+	play(anim_type)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

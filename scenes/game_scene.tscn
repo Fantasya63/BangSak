@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://djwi4jd3gw0"]
+[gd_scene load_steps=24 format=4 uid="uid://djwi4jd3gw0"]
 
 [ext_resource type="TileSet" uid="uid://beu0npov8vamw" path="res://tileset/world_tileset.tres" id="1_20bq2"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_xc528"]
@@ -12,6 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://b5i2pxfkiu1tv" path="res://music/Ambience.mp3" id="10_cnonx"]
 [ext_resource type="TileSet" uid="uid://bh73rcmeqw036" path="res://tileset/undergrowth.tres" id="11_pl7qx"]
 [ext_resource type="Texture2D" uid="uid://bk7c0dcemfxce" path="res://assets/textures/BangSakTemps/Animals/Chicken/chicken.png" id="12_fiadf"]
+[ext_resource type="PackedScene" uid="uid://dfaorrwrcx6sh" path="res://prefabs/manok.tscn" id="13_7fc2b"]
+[ext_resource type="PackedScene" uid="uid://c0m4k7lfka5im" path="res://prefabs/lenga.tscn" id="14_6lyvd"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6enfo"]
 properties/0/path = NodePath("/root/GameManager:players")
@@ -20,12 +22,12 @@ properties/0/replication_mode = 1
 
 [sub_resource type="Theme" id="Theme_vv5a6"]
 
-[sub_resource type="Gradient" id="Gradient_b8vbw"]
+[sub_resource type="Gradient" id="Gradient_krrhe"]
 offsets = PackedFloat32Array(0, 0.834884)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_stq2a"]
-gradient = SubResource("Gradient_b8vbw")
+gradient = SubResource("Gradient_krrhe")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -299,6 +301,13 @@ position = Vector2(381, -218)
 sprite_frames = SubResource("SpriteFrames_jncws")
 animation = &"new_animation"
 frame_progress = 0.119906
+
+[node name="manok" parent="." instance=ExtResource("13_7fc2b")]
+position = Vector2(-63, 12)
+
+[node name="anim" parent="." instance=ExtResource("14_6lyvd")]
+position = Vector2(51, -28)
+anim_type = "boy_hit_side"
 
 [connection signal="timeout" from="hide_timer" to="GUI/game_start_panel_seeker" method="_on_hide_timer_timeout"]
 [connection signal="pressed" from="GUI/Button" to="." method="_on_start_game_pressed"]
