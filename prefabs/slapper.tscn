@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://bs06pyoaxyhs5"]
+[gd_scene load_steps=10 format=3 uid="uid://bs06pyoaxyhs5"]
 
 [ext_resource type="Script" path="res://scripts/weapon/sak.gd" id="1_2t1e7"]
+[ext_resource type="Shader" path="res://shaders/visibility.gdshader" id="2_lrmel"]
 [ext_resource type="AudioStream" uid="uid://dbtlafyg2l7wv" path="res://sfx/hard-slap-46388.wav" id="3_f6arl"]
 [ext_resource type="Texture2D" uid="uid://can4ff4tm7irm" path="res://assets/textures/character/slap_hand.png" id="3_sd0bd"]
 [ext_resource type="PackedScene" uid="uid://du4dwjvuypi7b" path="res://hurtbox.tscn" id="5_irjwc"]
 [ext_resource type="Resource" uid="uid://dil3m66y6ydoq" path="res://data/SakAttack.tres" id="6_gg1yp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6wnpi"]
+shader = ExtResource("2_lrmel")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d3i5g"]
 radius = 24.0
@@ -16,12 +20,15 @@ properties/0/replication_mode = 2
 
 [node name="slapper" type="Node2D"]
 script = ExtResource("1_2t1e7")
+icon_path = NodePath("Sprite2D")
 
 [node name="cooldown_timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_6wnpi")
 position = Vector2(20, -32)
 rotation = 0.669582
 scale = Vector2(0.662664, 0.662664)

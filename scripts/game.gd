@@ -26,8 +26,7 @@ func _ready():
 		start_button.visible = false
 		
 	NetworkManager.player_loaded.rpc_id(1)
-	
-	
+
 	if multiplayer.is_server():
 		NetworkManager.player_connected.connect(_add_player)
 		_add_player(1, NetworkManager.player_info)
@@ -60,3 +59,8 @@ func _on_start_game_pressed():
 @rpc("any_peer", "call_local", "reliable", 0)
 func request_spawn(node):
 	call_deferred("add_child", node)
+
+
+func _on_hide_timer_timeout():
+	if multiplayer.is_server():
+		GameManager.on_game_countdown_ended.rpc()

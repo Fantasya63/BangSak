@@ -41,10 +41,15 @@ var eliminated := false
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 	
+	
 
 
 func _ready():
+	
+	self.call_deferred("set_name_tag")
+	
 	#print("SHAKE : ", shake)
+	GameManager.on_countdown_ended.connect(_server_on_countdown_ended)
 	GameManager.on_player_attacked.connect(_on_player_attacked)
 	GameManager.game_started.connect(_on_game_started)
 	$PlayerHitbox.playerID = name.to_int()
@@ -52,6 +57,8 @@ func _ready():
 	
 	for weapon : BaseWeapon in weapons:
 		weapon.disable()
+		if not is_multiplayer_authority():
+			weapon.hide_icons()
 	
 	if is_multiplayer_authority():
 		var cam = camera_prefab.instantiate()
@@ -62,7 +69,6 @@ func _ready():
 		
 	team = 0 if name.to_int() == 1 else 1
 	set_weapon()
-	
 	print_debug("Team: " + str(team) + " id: " + name)
 
 
@@ -72,6 +78,12 @@ func reset():
 	anim.play("down_idle")
 	team = GameManager.get_team(name.to_int())
 	set_weapon()
+	
+	eliminated = false
+	set_process_input(true)
+	$CollisionShape2D.set_deferred("disabled", false)
+	$PlayerHitbox/CollisionShape2D.set_deferred("disabled", false)
+	anim.modulate = Color.WHITE
 
 
 # called by the game manager when a player is attacked
@@ -80,9 +92,29 @@ func _on_player_attacked(id : int):
 		eliminate()
 
 
+func _server_on_countdown_ended():
+	if GameManager.get_team(name.to_int()) == 0:
+		set_process_input(true)
+		set_process_unhandled_input(true)
+		set_process(true)
+		set_physics_process(true)
+
+
 # Called by the game manager when the game is started
 func _on_game_started():
 	reset()
+	
+	if team == 0:
+		set_process(false)
+		set_physics_process(false)
+		set_process_input(false)
+		set_process_unhandled_input(false)
+	
+	# Disable nametag for other players
+	# But only those who are not in our team
+	# Those who are, we enable them
+	if not is_multiplayer_authority():
+		$nametag.visible = team == GameManager.get_team(get_tree().root.multiplayer.get_unique_id())
 
 
 # Set the weapon to use with the set player team
@@ -95,6 +127,11 @@ func set_weapon():
 	# Get new weapon and enable it
 	current_weapon = weapons[team]
 	current_weapon.enable()
+
+
+func set_name_tag():
+	var _name = NetworkManager.players[name.to_int()]['name']
+	$nametag.text = _name
 
 
 func _physics_process(delta):
@@ -208,6 +245,9 @@ func _input(event):
 func rpc_fire():
 	current_weapon.rpc_apply_fire()
 	print_debug("Debug RPC FIRE")
+
+
+
 
 
 func eliminate():

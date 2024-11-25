@@ -4,10 +4,12 @@
 [ext_resource type="Script" path="res://scripts/join_popup.gd" id="2_0g8l0"]
 
 [node name="join_popup" type="PopupPanel"]
+transparent_bg = true
 title = "asda"
 initial_position = 1
 size = Vector2i(374, 169)
 visible = true
+transparent = true
 theme = ExtResource("1_flg3t")
 script = ExtResource("2_0g8l0")
 

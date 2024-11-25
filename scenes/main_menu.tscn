@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bvh5rkujgm6rl"]
+[gd_scene load_steps=25 format=4 uid="uid://bvh5rkujgm6rl"]
 
 [ext_resource type="Texture2D" uid="uid://bke7vtlcybvw7" path="res://assets/textures/BangSakTemps/Player/player2.png" id="2_38bsk"]
 [ext_resource type="PackedScene" uid="uid://bw6viuij2kx0s" path="res://scenes/main_menu_gui.tscn" id="2_aori0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ea5jq7843c6a" path="res://assets/textures/character/boy.png" id="3_5btqu"]
 [ext_resource type="TileSet" uid="uid://beu0npov8vamw" path="res://tileset/world_tileset.tres" id="3_d27lf"]
 [ext_resource type="TileSet" uid="uid://bh73rcmeqw036" path="res://tileset/undergrowth.tres" id="4_obc13"]
+[ext_resource type="PackedScene" uid="uid://df2hbwjnyhs15" path="res://prefabs/scene_modulate.tscn" id="8_o6q2p"]
 [ext_resource type="AudioStream" uid="uid://rf043pujxnci" path="res://music/Game_title_rock_wav.wav" id="12_5rnik"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_isjod"]
@@ -285,3 +286,5 @@ metadata/_edit_lock_ = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_5rnik")
 autoplay = true
+
+[node name="CanvasModulate" parent="." instance=ExtResource("8_o6q2p")]

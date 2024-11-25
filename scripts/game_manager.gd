@@ -28,11 +28,18 @@ func get_team(playerID : int):
 	return stat['team']
 
 
+# TODO: Fix so that we are not passing a ref
+# We should pass a value
 @rpc("authority", "call_local", "reliable", 0)
 func register_game(_players : Dictionary):
 	_game_started_flag = true
+	_countdown_ended = false
 	players = _players
 	game_started.emit()
+
+
+func play_again_pressed():
+	start_game()
 
 
 func start_game():
@@ -51,7 +58,7 @@ func start_game():
 	var seekerID = playerIDs.pick_random()
 	while seekerID == 1:
 		seekerID = playerIDs.pick_random()
-		
+	
 	#seekerID = 1
 	
 	num_hiders = playerIDs.size() - 1
@@ -108,6 +115,14 @@ func start_game():
 	#notify_player_eliminattion.rpc(playerID)
 	#notify other players
 
+signal on_countdown_ended
+var _countdown_ended := false
+# RPC to clients to tell that the server's hide time has ended
+@rpc("authority", "call_local", "reliable")
+func on_game_countdown_ended():
+	on_countdown_ended.emit()
+	_countdown_ended = true
+
 
 signal on_player_attacked(id : int)
 # The server can only call and is executed in all players
@@ -121,13 +136,13 @@ func _notify_player_attacked(playerID : int):
 		
 	stats['eliminated'] = true
 	players[playerID] = stats
-	on_player_attacked.emit()
 	
 	var rem : int
 	for id in players:
 		if players[id]["team"] == 1 and players[id]['eliminated'] == false:
 			rem += 1
 	
+	on_player_attacked.emit(rem)
 	
 	if get_team(playerID) == 0:
 		# Seeker Eliminated:
@@ -155,20 +170,26 @@ func _notify_player_attacked(playerID : int):
 # Anyone can call but only the server will execute
 @rpc("any_peer","call_local", "reliable")
 func attack_player(attack : Attack, id : int):
+	if not _countdown_ended:
+		return
+	
 	match attack.type:
 		0:
+			#Bang
 			var _team = get_team(id)
 			if _team == 0:
 				return
 			_notify_player_attacked.rpc(id)
 			
 		1:
+			#Sak
 			var _team = get_team(id)
 			if _team == 1:
 				return
 			_notify_player_attacked.rpc(id)
 
 		2:
+			#Stun
 			pass
 
 

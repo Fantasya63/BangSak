@@ -170,15 +170,18 @@ theme_override_constants/separation = 8
 
 [node name="CreateBtn" type="Button" parent="Control/CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = SubResource("Theme_0jj44")
 text = "Create Game"
 
 [node name="JoinBtn" type="Button" parent="Control/CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Join Game"
 
 [node name="ExitBtn" type="Button" parent="Control/CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Exit"
 
 [node name="accountBtn" type="TextureButton" parent="Control"]

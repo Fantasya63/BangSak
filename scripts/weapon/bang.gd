@@ -1,5 +1,5 @@
 extends BaseWeapon
-class_name Weapon
+class_name Bang
 
 
 @export var bullet_prefab : PackedScene
@@ -7,6 +7,11 @@ class_name Weapon
 
 func _ready():
 	super._ready()
+
+
+# Do not hide the icon of the seeker
+func hide_icons():
+	pass
 
 
 func _process(delta):

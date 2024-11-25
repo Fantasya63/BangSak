@@ -1,8 +1,9 @@
-[gd_scene load_steps=57 format=3 uid="uid://gbjkjwj50dbo"]
+[gd_scene load_steps=59 format=3 uid="uid://gbjkjwj50dbo"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rrqay"]
 [ext_resource type="PackedScene" uid="uid://blxdfhiey7v74" path="res://prefabs/follow_cam.tscn" id="2_ertm3"]
 [ext_resource type="Texture2D" uid="uid://bke7vtlcybvw7" path="res://assets/textures/BangSakTemps/Player/player2.png" id="4_mw4qp"]
+[ext_resource type="Shader" path="res://shaders/visibility.gdshader" id="4_ois65"]
 [ext_resource type="Texture2D" uid="uid://ea5jq7843c6a" path="res://assets/textures/character/boy.png" id="4_pxakc"]
 [ext_resource type="AudioStream" uid="uid://cg77elo6s8lvo" path="res://sfx/151230__owlstorm__grassy-footstep-1.wav" id="6_u3xgf"]
 [ext_resource type="AudioStream" uid="uid://d2pkv83rc1bmq" path="res://sfx/151229__owlstorm__grassy-footstep-2.wav" id="7_trumr"]
@@ -13,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://dfk1cx8jbqoac" path="res://prefabs/player_hitbox.tscn" id="10_0ihei"]
 [ext_resource type="PackedScene" uid="uid://bs06pyoaxyhs5" path="res://prefabs/slapper.tscn" id="12_qgeew"]
 [ext_resource type="Texture2D" uid="uid://bwyl1r8frq11t" path="res://assets/textures/light.png" id="14_wfqpv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1c85e"]
+shader = ExtResource("4_ois65")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gph3d"]
 atlas = ExtResource("4_pxakc")
@@ -358,11 +362,13 @@ collision_layer = 2
 script = ExtResource("1_rrqay")
 eliminated_color = Color(0.777344, 0.23381, 0.23381, 1)
 name_path = NodePath("nametag")
+sprint_speed = 100.0
 anim_speed_scale = 0.25
 camera_prefab = ExtResource("2_ertm3")
 
 [node name="sight_cast" type="PointLight2D" parent="."]
 position = Vector2(0, -29)
+scale = Vector2(1.075, 1.075)
 blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("14_wfqpv")
@@ -370,15 +376,10 @@ texture = ExtResource("14_wfqpv")
 [node name="anim" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 texture_filter = 1
+material = SubResource("ShaderMaterial_1c85e")
 sprite_frames = SubResource("SpriteFrames_odxhp")
 animation = &"down_idle"
 offset = Vector2(0, -15)
-
-[node name="sight_cast" type="PointLight2D" parent="."]
-position = Vector2(-46, -28)
-blend_mode = 2
-shadow_enabled = true
-texture = ExtResource("14_wfqpv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -435,7 +436,6 @@ shape = SubResource("CapsuleShape2D_0tbio")
 [node name="weapons" type="Node2D" parent="."]
 
 [node name="sak" parent="weapons" instance=ExtResource("12_qgeew")]
-attack_range = 16.0
 fire_point_path = NodePath("slap_point")
 
 [node name="slap_point" type="Node2D" parent="weapons/sak"]

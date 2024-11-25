@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/shake.gd" id="1_d1tdi"]
 
 [node name="Camera2D" type="Camera2D"]
-zoom = Vector2(4, 4)
+zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 script = ExtResource("1_d1tdi")
+dur = 1.0

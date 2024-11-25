@@ -16,6 +16,7 @@ config/features=PackedStringArray("4.3", "Mobile")
 
 [autoload]
 
+Utils="*res://scripts/utils/utils.gd"
 NetworkManager="*res://scripts/network_manager.gd"
 GameManager="*res://scripts/game_manager.gd"
 
