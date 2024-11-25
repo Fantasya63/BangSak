@@ -137,7 +137,7 @@ func set_name_tag():
 func _physics_process(delta):
 	if GameManager.is_game_started():
 		if GameManager.players[name.to_int()]['eliminated'] == true:
-			if $shake:
+			if $shake and not eliminated:
 				$shake.apply_shake()
 			eliminate()
 	
