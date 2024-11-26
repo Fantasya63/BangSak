@@ -118,7 +118,6 @@ text = "1/6"
 script = ExtResource("7_nf8hy")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GUI"]
-visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0

@@ -1,6 +1,6 @@
 extends Node
 
-enum {Seeker, Hider}
+enum TEAM { Seeker, Hider }
 
 var players : Dictionary = {
 	# ID, #GameStat
@@ -31,10 +31,12 @@ func get_team(playerID : int):
 # TODO: Fix so that we are not passing a ref
 # We should pass a value
 @rpc("authority", "call_local", "reliable", 0)
-func register_game(_players : Dictionary):
+func register_game(_players : Dictionary, _num_hider : int):
 	_game_started_flag = true
 	_countdown_ended = false
 	players = _players
+	num_hiders = _num_hider
+	num_hiders_left = _num_hider
 	game_started.emit()
 
 
@@ -73,7 +75,7 @@ func start_game():
 		stat['team'] = 0 if playerID == seekerID else 1
 		players[playerID] = stat
 
-	register_game.rpc(players)
+	register_game.rpc(players, num_hiders)
 
 signal on_countdown_ended
 var _countdown_ended := false
@@ -97,14 +99,15 @@ func _notify_player_attacked(playerID : int):
 	stats['eliminated'] = true
 	players[playerID] = stats
 	
+	#TODO: Refactor.  this is not working in other client
 	var rem : int
 	for id in players:
 		if players[id]["team"] == 1 and players[id]['eliminated'] == false:
 			rem += 1
 	
-	on_player_attacked.emit(rem)
+	on_player_attacked.emit(playerID)
 	
-	if get_team(playerID) == 0:
+	if get_team(playerID) == TEAM.Seeker:
 		# Seeker Eliminated:
 		game_ended.emit(1)
 	else:
@@ -112,19 +115,6 @@ func _notify_player_attacked(playerID : int):
 		num_hiders_left = rem
 		if num_hiders_left <= 0:
 			game_ended.emit(0)
-	
-#
-## The server can only call and is executed in all players
-#func _anotify_player_attacked(playerID : int):
-	#var stats : Dictionary = players[playerID]
-	#
-	## eliminate player
-	#if stats['eliminated'] == true:
-		#return
-		#
-	#stats['eliminated'] = true
-	#players[playerID] = stats
-	#on_player_attacked.emit()
 
 
 # Anyone can call but only the server will execute
@@ -134,46 +124,23 @@ func attack_player(attack : Attack, id : int):
 		return
 	
 	match attack.type:
-		0:
-			#Bang
+		Attack.TYPE.Bang:
 			var _team = get_team(id)
 			if _team == 0:
 				return
 			_notify_player_attacked.rpc(id)
-			
-		1:
-			#Sak
+		
+		
+		Attack.TYPE.Sak:
 			var _team = get_team(id)
 			if _team == 1:
 				return
 			_notify_player_attacked.rpc(id)
-
-		2:
-			# Stun
+		
+		
+		Attack.TYPE.Stun:
+			# TODO: Implement Stun
 			pass
-
-#
-#func _attack_player(attack : Attack, id : int):
-	#match attack:
-		#Attack.Bang:
-			#var _team = get_team(id)
-			#if _team == 0:
-				#return
-			#NetworkManager._notify_player_attacked.rpc(id)
-			#
-		#Attack.Sak:
-			#var _team = get_team(id)
-			#if _team == 1:
-				#return
-			#NetworkManager._notify_player_attacked.rpc(id)
-#
-		#Attack.Stun:
-			#pass
-
-signal on_rpc_player_has_attacked(id : int)
-@rpc("authority", "call_remote", "reliable")
-func rpc_notify_player_has_attacked():
-	pass
 
 
 # Call on every peer
@@ -189,30 +156,3 @@ func rpc_on_player_fire():
 	
 	if OS.is_debug_build():
 		on_debug_rpc.emit(multiplayer.get_remote_sender_id())
-
-
-
-# Call on every peer
-# WARNING! DO NOT SEND DATA THROUGH RPC
-# IDK WHY BUT ITS NOT WORKING! Maybe its just sending the ref of it? 
-#@rpc("any_peer", "call_local", "reliable")
-#func rpc_debug():
-	#if not multiplayer.is_server():
-		#return
-	#
-	#var senderID = multiplayer.get_remote_sender_id()
-	#var player : Player = get_tree().root.get_node("Game").get_node(str(senderID))
-	#player.rpc_fire()
-	#
-	#if OS.is_debug_build():
-		#on_debug_rpc.emit(multiplayer.get_remote_sender_id())
-
-
-@rpc("any_peer", "call_local", "reliable")
-func request_spawn(prefab : PackedScene, id : int, pos : Vector2, rot : float):
-	var node = prefab.instantiate()
-	node.global_rotation = rot
-	node.global_position = pos
-	node.set_multiplayer_authority(id)
-	
-	get_tree().root.get_node("Game").call_deferred("add_child", node)

@@ -8,6 +8,7 @@ class_name Player
 @export_node_path("Label") var name_path
 @onready var nametag : Label = get_node(name_path)
 
+@onready var authority_id : int = name.to_int() 
 
 @onready var footstep_audios = [
 	$footstep/footstepAudio1,
@@ -46,12 +47,8 @@ func get_cam() -> FollowCam:
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 	
-	
-
 
 func _ready():
-	
-	
 	#print("SHAKE : ", shake)
 	GameManager.on_countdown_ended.connect(_server_on_countdown_ended)
 	GameManager.on_player_attacked.connect(_on_player_attacked)
@@ -70,10 +67,14 @@ func _ready():
 		add_child(cam)
 	else:
 		$sight_cast.visible = false
-		
-	team = 0 if name.to_int() == 1 else 1
+	
+	
+	team = 0 if authority_id == 1 else 1
 	set_weapon()
-	print_debug("Team: " + str(team) + " id: " + name)
+
+	# Set weapon req
+	$weapons/bang_holder/bang.player = self
+
 
 
 # resets the playey to be ready to start another game
@@ -263,9 +264,6 @@ func _input(event):
 func rpc_fire():
 	current_weapon.rpc_apply_fire()
 	print_debug("Debug RPC FIRE")
-
-
-
 
 
 func eliminate():

@@ -13,10 +13,16 @@ func _ready():
 	# Compile the regular expression for IPv4
 	ip_regex.compile(r"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$")
 
+
+func _on_ready_to_load():
+	pass
+
+
 func _on_join_btn_pressed():
 	
 	if is_valid_ip(ip_input.text):
 		NetworkManager.join_game(ip_input.text)
+		
 		NetworkManager.load_game("res://scenes/game_scene.tscn")
 	else:
 		print_debug("Invalid IP address.")
