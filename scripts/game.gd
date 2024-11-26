@@ -32,10 +32,10 @@ func _ready():
 		_add_player(1, NetworkManager.player_info)
 
 
+# Server
 func _add_player(id, player_info):
 	var player = player_scene.instantiate()
 	player.name = str(id)
-	
 	
 	# Set position
 	var spawn_pos_id = randi_range(0, player_spawn_positions.size() - 1)

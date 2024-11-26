@@ -6,6 +6,7 @@ extends Node
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
+signal player_registered(id)
 
 const PORT = 7000
 const DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
@@ -26,9 +27,9 @@ var player_info = {
 	"gender": 0,
 }
 
+
 var players_loaded = 0
 var game_started := false
-
 
 @rpc("any_peer", "call_local", "reliable")
 func _req_info():
@@ -95,8 +96,26 @@ func player_loaded():
 func _on_player_connected(id):
 	_register_player.rpc_id(id, player_info)
 
+signal on_player_name_reply(name : String, id : int)
 
-@rpc("any_peer", "reliable")
+
+@rpc("authority", "call_local", "reliable")
+func _reply_player_name(name, id):
+	on_player_name_reply.emit(name, id)
+
+
+@rpc("any_peer", "call_local", "reliable")
+func ask_player_name(id : int):
+	if not multiplayer.is_server():
+		print_debug("ERROR: Ask player info is called on a non server")
+		return
+	
+	var requestor = multiplayer.get_remote_sender_id()
+	_reply_player_name.rpc_id(requestor, players[id]['name'], id)
+
+
+# Local
+@rpc("any_peer", "reliable" )
 func _register_player(new_player_info):
 	var new_player_id = multiplayer.get_remote_sender_id()
 	players[new_player_id] = new_player_info

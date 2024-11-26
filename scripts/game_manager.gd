@@ -56,8 +56,9 @@ func start_game():
 	
 	
 	var seekerID = playerIDs.pick_random()
-	while seekerID == 1:
-		seekerID = playerIDs.pick_random()
+	# while seekerID == 1:
+		#seekerID = playerIDs.pick_random()
+	#
 	
 	#seekerID = 1
 	
@@ -73,47 +74,6 @@ func start_game():
 		players[playerID] = stat
 
 	register_game.rpc(players)
-
-#
-#@rpc("any_peer", "call_local", "reliable")
-#func notify_player_eliminattion(playerID : int):
-	#if playerID == multiplayer.get_unique_id():
-		#return
-	#
-	#players[playerID]['eliminated'] = true
-	#var player = get_tree().root.get_node("Game").get_node(str(playerID))
-	#player.eliminate()
-	#
-	#var rem : int
-	#for id in players:
-		#if players[id]["team"] == 1 and players[id]['eliminated'] == false:
-			#rem += 1
-	#
-	#if get_team(playerID) == 0:
-		## Seeker Eliminated:
-		#game_ended.emit(1)
-	#else:
-		## Hider Eliminated:
-		#num_hiders_left = rem
-		#if num_hiders_left <= 0:
-			#game_ended.emit(0)
-	#
-	#on_player_eliminated.emit(num_hiders_left)
-
-#
-## Server and Sender
-#@rpc("any_peer", "call_local", "reliable")
-#func eliminate(playerID : int):
-	#var stats : Dictionary = players[playerID]
-	#
-	## eliminate player
-	#if stats['eliminated'] == true:
-		#return
-		#
-	#stats['eliminated'] = true
-	#players[playerID] = stats
-	#notify_player_eliminattion.rpc(playerID)
-	#notify other players
 
 signal on_countdown_ended
 var _countdown_ended := false

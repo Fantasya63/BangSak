@@ -51,7 +51,6 @@ func _enter_tree():
 
 func _ready():
 	
-	self.call_deferred("set_name_tag")
 	
 	#print("SHAKE : ", shake)
 	GameManager.on_countdown_ended.connect(_server_on_countdown_ended)
@@ -134,8 +133,16 @@ func set_weapon():
 	current_weapon.enable()
 
 
+func set_name_tag_with_name(_name: String):
+	$nametag.text = _name
+	
+
 func set_name_tag():
 	var _name = NetworkManager.players[name.to_int()]['name']
+	if not _name:
+		if OS.is_debug_build():
+			breakpoint
+		_name = "name"
 	$nametag.text = _name
 
 
@@ -178,9 +185,9 @@ func _physics_process(delta):
 			velocity = move_input * walk_speed
 		
 		move_and_slide()
-		
-	if not eliminated:
-		play_anim()
+	
+	# Normal Anim
+	play_anim()
 	
 
 
@@ -201,6 +208,11 @@ func play_anim():
 		anim.speed_scale = speed * anim_speed_scale * 0.1
 	else:
 		anim.speed_scale = 1.0
+		
+	if eliminated:
+		anim.flip_h = sprite_dir == SPRITE_DIR.LEFT
+		return
+	
 	match sprite_dir:
 		SPRITE_DIR.UP:
 			# Dont flip the sprite
@@ -234,6 +246,7 @@ func play_anim():
 			else:
 				anim.play("side_idle")
 
+		# TODO: REFACTOR TO INCLUDE ELIMINATED STATE IN PLAYING ANIM
 
 # Disables all the weapons
 func disable_weapons():

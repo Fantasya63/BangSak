@@ -1,10 +1,12 @@
-[gd_scene load_steps=58 format=3 uid="uid://gbjkjwj50dbo"]
+[gd_scene load_steps=60 format=3 uid="uid://gbjkjwj50dbo"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rrqay"]
 [ext_resource type="PackedScene" uid="uid://blxdfhiey7v74" path="res://prefabs/follow_cam.tscn" id="2_ertm3"]
 [ext_resource type="Shader" path="res://shaders/visibility.gdshader" id="4_ois65"]
 [ext_resource type="Texture2D" uid="uid://ea5jq7843c6a" path="res://assets/textures/character/boy.png" id="4_pxakc"]
+[ext_resource type="Texture2D" uid="uid://dcgy8vueib8fu" path="res://assets/textures/boy.png" id="6_esg6u"]
 [ext_resource type="AudioStream" uid="uid://cg77elo6s8lvo" path="res://sfx/151230__owlstorm__grassy-footstep-1.wav" id="6_u3xgf"]
+[ext_resource type="Script" path="res://prefabs/nametag.gd" id="7_8clmv"]
 [ext_resource type="AudioStream" uid="uid://d2pkv83rc1bmq" path="res://sfx/151229__owlstorm__grassy-footstep-2.wav" id="7_trumr"]
 [ext_resource type="AudioStream" uid="uid://b4d5t60lkhyx4" path="res://sfx/151228__owlstorm__grassy-footstep-3.wav" id="8_5pc0u"]
 [ext_resource type="PackedScene" uid="uid://qxtpwn7wpn0a" path="res://prefabs/weapon.tscn" id="8_q8b1p"]
@@ -65,16 +67,16 @@ region = Rect2(128, 0, 32, 32)
 atlas = ExtResource("4_pxakc")
 region = Rect2(160, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xf2cs"]
-atlas = ExtResource("4_pxakc")
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqt1h"]
+atlas = ExtResource("6_esg6u")
 region = Rect2(0, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pdh1j"]
-atlas = ExtResource("4_pxakc")
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xj8d"]
+atlas = ExtResource("6_esg6u")
 region = Rect2(32, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jn1wj"]
-atlas = ExtResource("4_pxakc")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xyir"]
+atlas = ExtResource("6_esg6u")
 region = Rect2(64, 192, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f6yv2"]
@@ -223,13 +225,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xf2cs")
+"texture": SubResource("AtlasTexture_tqt1h")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pdh1j")
+"texture": SubResource("AtlasTexture_0xj8d")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jn1wj")
+"texture": SubResource("AtlasTexture_4xyir")
 }],
 "loop": true,
 "name": &"eliminated",
@@ -395,6 +397,7 @@ offset_bottom = -15.0
 scale = Vector2(0.431854, 0.431854)
 text = "username"
 horizontal_alignment = 1
+script = ExtResource("7_8clmv")
 metadata/_edit_use_anchors_ = true
 
 [node name="footstepTimer" type="Timer" parent="."]

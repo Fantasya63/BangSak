@@ -28,6 +28,7 @@ texture = ExtResource("2_lg0k4")
 
 [node name="fire_sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_5lm55")
+volume_db = 24.0
 
 [node name="fire" type="Node2D" parent="."]
 position = Vector2(16, -1)
