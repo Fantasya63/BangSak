@@ -1,8 +1,7 @@
-[gd_scene load_steps=59 format=3 uid="uid://gbjkjwj50dbo"]
+[gd_scene load_steps=58 format=3 uid="uid://gbjkjwj50dbo"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rrqay"]
 [ext_resource type="PackedScene" uid="uid://blxdfhiey7v74" path="res://prefabs/follow_cam.tscn" id="2_ertm3"]
-[ext_resource type="Texture2D" uid="uid://bke7vtlcybvw7" path="res://assets/textures/BangSakTemps/Player/player2.png" id="4_mw4qp"]
 [ext_resource type="Shader" path="res://shaders/visibility.gdshader" id="4_ois65"]
 [ext_resource type="Texture2D" uid="uid://ea5jq7843c6a" path="res://assets/textures/character/boy.png" id="4_pxakc"]
 [ext_resource type="AudioStream" uid="uid://cg77elo6s8lvo" path="res://sfx/151230__owlstorm__grassy-footstep-1.wav" id="6_u3xgf"]
@@ -66,17 +65,17 @@ region = Rect2(128, 0, 32, 32)
 atlas = ExtResource("4_pxakc")
 region = Rect2(160, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jvcbs"]
-atlas = ExtResource("4_mw4qp")
-region = Rect2(0, 160, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf2cs"]
+atlas = ExtResource("4_pxakc")
+region = Rect2(0, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nufci"]
-atlas = ExtResource("4_mw4qp")
-region = Rect2(32, 160, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdh1j"]
+atlas = ExtResource("4_pxakc")
+region = Rect2(32, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vd52x"]
-atlas = ExtResource("4_mw4qp")
-region = Rect2(64, 160, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn1wj"]
+atlas = ExtResource("4_pxakc")
+region = Rect2(64, 192, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f6yv2"]
 atlas = ExtResource("4_pxakc")
@@ -224,13 +223,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jvcbs")
+"texture": SubResource("AtlasTexture_xf2cs")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nufci")
+"texture": SubResource("AtlasTexture_pdh1j")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vd52x")
+"texture": SubResource("AtlasTexture_jn1wj")
 }],
 "loop": true,
 "name": &"eliminated",
@@ -360,7 +359,7 @@ height = 32.0
 y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_rrqay")
-eliminated_color = Color(0.777344, 0.23381, 0.23381, 1)
+eliminated_color = Color(1, 1, 1, 1)
 name_path = NodePath("nametag")
 sprint_speed = 100.0
 anim_speed_scale = 0.25
@@ -378,7 +377,7 @@ y_sort_enabled = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_1c85e")
 sprite_frames = SubResource("SpriteFrames_odxhp")
-animation = &"down_idle"
+animation = &"eliminated"
 offset = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

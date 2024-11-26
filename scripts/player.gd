@@ -37,6 +37,11 @@ var speed := 0.0
 var player_info 
 var eliminated := false
 
+var cam : FollowCam
+
+func get_cam() -> FollowCam:
+	return cam
+
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
@@ -61,7 +66,7 @@ func _ready():
 			weapon.hide_icons()
 	
 	if is_multiplayer_authority():
-		var cam = camera_prefab.instantiate()
+		cam = camera_prefab.instantiate()
 		cam.name = "shake"
 		add_child(cam)
 	else:

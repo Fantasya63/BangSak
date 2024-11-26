@@ -37,6 +37,9 @@ func rpc_apply_fire():
 
 
 func fire():
+	var cam : FollowCam = $"../../..".get_cam()
+	cam.apply_shake(8.0, 16.0)
+	
 	super.fire()
 	print_debug("Position: " + str(fire_point.global_position))
 	
@@ -48,4 +51,5 @@ func fire():
 	bullet.global_position = fire_point.global_position
 	bullet.global_rotation = fire_point.global_rotation
 	get_tree().root.get_node("Game").call_deferred("add_child", bullet)
+	
 	#NetworkManager._request_spawn.rpc_id(1, bullet, "/root/Game")

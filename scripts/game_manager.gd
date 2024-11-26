@@ -189,9 +189,8 @@ func attack_player(attack : Attack, id : int):
 			_notify_player_attacked.rpc(id)
 
 		2:
-			#Stun
+			# Stun
 			pass
-
 
 #
 #func _attack_player(attack : Attack, id : int):
