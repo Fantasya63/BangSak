@@ -11,6 +11,7 @@ func _on_create_btn_pressed():
 	NetworkManager.create_game()
 	NetworkManager.load_game("res://scenes/game_scene.tscn")
 
+
 func _on_join_btn_pressed():
 	join_popup.visible = true
 	

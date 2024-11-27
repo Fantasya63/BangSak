@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://bw6viuij2kx0s"]
+[gd_scene load_steps=26 format=3 uid="uid://bw6viuij2kx0s"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_ky4fw"]
 [ext_resource type="FontFile" uid="uid://kb8pm310g163" path="res://fonts/Montseratt/static/Montserrat-Bold.ttf" id="2_ylcoa"]
 [ext_resource type="FontFile" uid="uid://6r342ivmh023" path="res://fonts/Quiapo/Quiapo_Free.ttf" id="3_xlh6t"]
 [ext_resource type="Texture2D" uid="uid://cppvulbwskved" path="res://assets/textures/gui/Accounts.png" id="4_u38k1"]
+[ext_resource type="Script" path="res://scripts/mouse_hover_audio_detector.gd" id="5_gcnxo"]
 [ext_resource type="Texture2D" uid="uid://diuraxjygafxo" path="res://assets/textures/gui/Accounts_pressed.png" id="5_j0ks3"]
 [ext_resource type="PackedScene" uid="uid://b0s62dm42825l" path="res://prefabs/GUI/popup_panel.tscn" id="6_p13v1"]
 [ext_resource type="Texture2D" uid="uid://c7ipvm4yv736f" path="res://assets/textures/gui/tutorial_normal_btn.png" id="7_h602k"]
@@ -11,6 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://dbybxorpqittp" path="res://prefabs/GUI/account_popup.tscn" id="7_qgwy6"]
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="8_7ioml"]
 [ext_resource type="Texture2D" uid="uid://cmxyulay62xrg" path="res://assets/textures/gui/tutorial_hover.svg" id="8_hu5i4"]
+[ext_resource type="AudioStream" uid="uid://bpxikk82agmyj" path="res://sfx/gui_hover.mp3" id="12_2magt"]
+[ext_resource type="Script" path="res://scripts/gui_hover_sfx_player.gd" id="13_vnotj"]
+[ext_resource type="AudioStream" uid="uid://ddygfj2pslkg4" path="res://sfx/gui_confirm.mp3" id="15_huw6m"]
+[ext_resource type="Script" path="res://scripts/gui_confirm_sfx_player.gd" id="16_a3rr5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_661ae"]
 shader = ExtResource("8_7ioml")
@@ -185,22 +190,28 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_0jj44")
 text = "Create Game"
+script = ExtResource("5_gcnxo")
 
 [node name="JoinBtn" type="Button" parent="Control/CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Join Game"
+script = ExtResource("5_gcnxo")
 
 [node name="ExitBtn" type="Button" parent="Control/CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Exit"
+script = ExtResource("5_gcnxo")
 
 [node name="PopupPanel" parent="Control" instance=ExtResource("6_p13v1")]
+visible = false
 
 [node name="account" parent="Control" instance=ExtResource("7_qgwy6")]
+visible = false
 
 [node name="tutorial_popup" parent="Control" instance=ExtResource("7_ocnjd")]
+visible = false
 max_size = Vector2i(32768, 370)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
@@ -228,6 +239,7 @@ texture_normal = ExtResource("7_h602k")
 texture_pressed = ExtResource("7_h602k")
 texture_hover = ExtResource("8_hu5i4")
 ignore_texture_size = true
+script = ExtResource("5_gcnxo")
 
 [node name="accountBtn" type="TextureButton" parent="Control/HBoxContainer"]
 texture_filter = 2
@@ -238,6 +250,15 @@ texture_normal = ExtResource("4_u38k1")
 texture_pressed = ExtResource("4_u38k1")
 texture_hover = ExtResource("5_j0ks3")
 ignore_texture_size = true
+script = ExtResource("5_gcnxo")
+
+[node name="gui_hover_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_2magt")
+script = ExtResource("13_vnotj")
+
+[node name="gui_hover_player2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_huw6m")
+script = ExtResource("16_a3rr5")
 
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Buttons/CreateBtn" to="." method="_on_create_btn_pressed"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Buttons/JoinBtn" to="." method="_on_join_btn_pressed"]

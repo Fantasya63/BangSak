@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0s62dm42825l"]
+[gd_scene load_steps=4 format=3 uid="uid://b0s62dm42825l"]
 
 [ext_resource type="Theme" uid="uid://c277i8863ij4c" path="res://new_theme.tres" id="1_flg3t"]
 [ext_resource type="Script" path="res://scripts/join_popup.gd" id="2_0g8l0"]
+[ext_resource type="Script" path="res://scripts/mouse_hover_audio_detector.gd" id="3_c5a8h"]
 
 [node name="join_popup" type="PopupPanel"]
 transparent_bg = true
@@ -48,8 +49,10 @@ caret_blink = true
 [node name="JoinBtn" type="Button" parent="VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_flg3t")
 theme_type_variation = &"PopupButton"
 text = "Join"
+script = ExtResource("3_c5a8h")
 
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]

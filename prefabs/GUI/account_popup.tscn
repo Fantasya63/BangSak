@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbybxorpqittp"]
+[gd_scene load_steps=4 format=3 uid="uid://dbybxorpqittp"]
 
 [ext_resource type="Theme" uid="uid://c277i8863ij4c" path="res://new_theme.tres" id="1_feavj"]
 [ext_resource type="Script" path="res://scripts/account_popup.gd" id="2_atbrh"]
+[ext_resource type="Script" path="res://scripts/mouse_hover_audio_detector.gd" id="3_eakci"]
 
 [node name="account_popup" type="PopupPanel"]
 transparent_bg = true
@@ -39,9 +40,11 @@ caret_blink = true
 [node name="SaveBtn" type="Button" parent="VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_feavj")
 theme_type_variation = &"PopupButton"
 text = "Save"
+script = ExtResource("3_eakci")
 
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/SaveBtn" to="." method="_on_save_btn_pressed"]

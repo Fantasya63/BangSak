@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://djwi4jd3gw0"]
+[gd_scene load_steps=23 format=4 uid="uid://djwi4jd3gw0"]
 
 [ext_resource type="TileSet" uid="uid://beu0npov8vamw" path="res://tileset/world_tileset.tres" id="1_20bq2"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_xc528"]
@@ -6,7 +6,6 @@
 [ext_resource type="Theme" uid="uid://c4xb0yaplskum" path="res://themes/main_menu_gui.tres" id="4_axsw6"]
 [ext_resource type="Script" path="res://scenes/start_button.gd" id="5_1k4td"]
 [ext_resource type="Script" path="res://scripts/game_start_panel_seeker.gd" id="5_oakrp"]
-[ext_resource type="Theme" uid="uid://c277i8863ij4c" path="res://new_theme.tres" id="6_gpevo"]
 [ext_resource type="Script" path="res://scripts/player_left.gd" id="6_isrec"]
 [ext_resource type="Script" path="res://scripts/player_count.gd" id="7_nf8hy"]
 [ext_resource type="Script" path="res://scenes/panel.gd" id="8_n1nm8"]
@@ -96,8 +95,6 @@ offset_bottom = -37.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_default_cursor_shape = 2
-theme = ExtResource("6_gpevo")
-theme_type_variation = &"PopupButton"
 text = "Start Game"
 script = ExtResource("5_1k4td")
 

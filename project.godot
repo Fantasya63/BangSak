@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.3", "Mobile")
 Utils="*res://scripts/utils/utils.gd"
 NetworkManager="*res://scripts/network_manager.gd"
 GameManager="*res://scripts/game_manager.gd"
+AudioManager="*res://scripts/audio_manager.gd"
 
 [display]
 

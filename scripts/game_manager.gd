@@ -3,6 +3,8 @@ extends Node
 enum TEAM { Seeker, Hider }
 
 var first_eliminated : int = 0
+var seeker_won : bool = false
+var is_first_game := true
 
 var players : Dictionary = {
 	# ID, #GameStat
@@ -45,7 +47,7 @@ func register_game(_players : Dictionary, _num_hider : int):
 func play_again_pressed():
 	start_game()
 
-
+var seekerID : int
 func start_game():
 	# Can only run by the server
 	if not multiplayer.is_server():
@@ -59,11 +61,15 @@ func start_game():
 		return
 	
 	
-	var seekerID = playerIDs.pick_random()
-	# while seekerID == 1:
-		#seekerID = playerIDs.pick_random()
-	#
+	if is_first_game:
+		seekerID = playerIDs.pick_random()
+		is_first_game = false
 	
+	elif seeker_won:
+		seekerID = first_eliminated
+	
+	first_eliminated = 0
+	seeker_won = false
 	#seekerID = 1
 	
 	num_hiders = playerIDs.size() - 1
@@ -111,12 +117,22 @@ func _notify_player_attacked(playerID : int):
 	
 	if get_team(playerID) == TEAM.Seeker:
 		# Seeker Eliminated:
+		if multiplayer.is_server():
+			seeker_won = false
+			first_eliminated = 0
+			
 		game_ended.emit(1)
+		
 	else:
 		# Hider Eliminated:
 		num_hiders_left = rem
 		if num_hiders_left <= 0:
+			if multiplayer.is_server():
+				seeker_won = true
+		
 			game_ended.emit(0)
+			
+				
 
 
 # Anyone can call but only the server will execute
@@ -130,6 +146,9 @@ func attack_player(attack : Attack, id : int):
 			var _team = get_team(id)
 			if _team == 0:
 				return
+				
+			if first_eliminated == 0:
+				first_eliminated = id
 			_notify_player_attacked.rpc(id)
 		
 		
