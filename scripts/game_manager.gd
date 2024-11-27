@@ -55,6 +55,8 @@ func start_game():
 	
 	# Get all the player keys
 	var playerIDs = NetworkManager.players.keys()
+	if playerIDs.size() <= 1:
+		return
 	
 	# Only start the game if there are players
 	if playerIDs.is_empty():
