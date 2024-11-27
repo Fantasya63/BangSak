@@ -1,30 +1,85 @@
-[gd_scene load_steps=7 format=3 uid="uid://qxtpwn7wpn0a"]
+[gd_scene load_steps=15 format=3 uid="uid://qxtpwn7wpn0a"]
 
 [ext_resource type="Script" path="res://scripts/weapon/bang.gd" id="1_v06xk"]
 [ext_resource type="PackedScene" uid="uid://c7q6iu7okvy5y" path="res://prefabs/bullet.tscn" id="2_i4cke"]
 [ext_resource type="Texture2D" uid="uid://bx416osdd6e0a" path="res://assets/textures/character/finger gun..png" id="2_lg0k4"]
-[ext_resource type="Shader" path="res://shaders/visibility.gdshader" id="3_76jct"]
 [ext_resource type="AudioStream" uid="uid://5nc2x0paxgtn" path="res://sfx/pew1.wav" id="4_5lm55"]
+[ext_resource type="Texture2D" uid="uid://dyeb8k7lp6t7a" path="res://assets/textures/sfx/FireEffects_Spritesheet3.png" id="4_xl13c"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5rvj4"]
-shader = ExtResource("3_76jct")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebq0s"]
+atlas = ExtResource("4_xl13c")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s68ja"]
+atlas = ExtResource("4_xl13c")
+region = Rect2(32, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2684"]
+atlas = ExtResource("4_xl13c")
+region = Rect2(64, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8m52"]
+atlas = ExtResource("4_xl13c")
+region = Rect2(96, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1f0b"]
+atlas = ExtResource("4_xl13c")
+region = Rect2(128, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mwe4"]
+atlas = ExtResource("4_xl13c")
+region = Rect2(0, 64, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s76an"]
+atlas = ExtResource("4_xl13c")
+region = Rect2(32, 64, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltrxl"]
+atlas = ExtResource("4_xl13c")
+region = Rect2(64, 64, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lrsnk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebq0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s68ja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2684")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8m52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1f0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mwe4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s76an")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltrxl")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 10.0
+}]
 
 [node name="weapon" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_v06xk")
 bullet_prefab = ExtResource("2_i4cke")
 fire_point_path = NodePath("fire")
-icon_path = NodePath("Sprite2D")
+icon_path = NodePath("finger_gun")
 
 [node name="cooldown_timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-y_sort_enabled = true
-material = SubResource("ShaderMaterial_5rvj4")
-position = Vector2(8, 0)
-texture = ExtResource("2_lg0k4")
 
 [node name="fire_sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_5lm55")
@@ -32,3 +87,15 @@ volume_db = 24.0
 
 [node name="fire" type="Node2D" parent="."]
 position = Vector2(16, -1)
+
+[node name="finger_gun" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(8, 0)
+texture = ExtResource("2_lg0k4")
+
+[node name="muzzle_flash" type="AnimatedSprite2D" parent="."]
+position = Vector2(25, 0)
+sprite_frames = SubResource("SpriteFrames_lrsnk")
+animation = &"fire"
+frame = 2
+frame_progress = 0.517645

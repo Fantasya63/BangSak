@@ -368,7 +368,7 @@ anim_speed_scale = 0.25
 camera_prefab = ExtResource("2_ertm3")
 
 [node name="sight_cast" type="PointLight2D" parent="."]
-position = Vector2(0, -29)
+position = Vector2(0, -36)
 scale = Vector2(1.075, 1.075)
 blend_mode = 2
 shadow_enabled = true

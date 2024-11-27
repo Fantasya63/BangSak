@@ -7,6 +7,8 @@ class_name Bang
 var player : Player
 
 func _ready():
+	var flash : AnimatedSprite2D = $muzzle_flash
+	flash.visible = false
 	super._ready()
 
 
@@ -41,10 +43,20 @@ func rpc_apply_fire():
 	bullet.global_rotation = fire_point.global_rotation
 	get_tree().root.get_node("Game").call_deferred("add_child", bullet)
 
+	_apply_flash()
+
+func _apply_flash():
+	var flash : AnimatedSprite2D = $muzzle_flash
+	flash.visible = true
+	flash.play("fire")
+	await get_tree().create_timer(0.9).timeout
+	flash.visible = false
+	
 
 func fire():
 	var cam : FollowCam = $"../../..".get_cam()
 	cam.apply_shake(8.0, 16.0)
+	
 	
 	super.fire()
 	print_debug("Position: " + str(fire_point.global_position))
@@ -58,4 +70,5 @@ func fire():
 	bullet.global_rotation = fire_point.global_rotation
 	get_tree().root.get_node("Game").call_deferred("add_child", bullet)
 	
+	_apply_flash()
 	#NetworkManager._request_spawn.rpc_id(1, bullet, "/root/Game")
