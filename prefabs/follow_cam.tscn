@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/shake.gd" id="1_d1tdi"]
 
 [node name="Camera2D" type="Camera2D"]
-zoom = Vector2(3, 3)
+zoom = Vector2(4.5, 4.5)
 position_smoothing_enabled = true
 script = ExtResource("1_d1tdi")
 random_magnitude = 8.0

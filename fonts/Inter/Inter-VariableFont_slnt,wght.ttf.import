@@ -14,7 +14,7 @@ dest_files=["res://.godot/imported/Inter-VariableFont_slnt,wght.ttf-d5f1ed5eec73
 
 Rendering=null
 antialiasing=1
-generate_mipmaps=false
+generate_mipmaps=true
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
@@ -28,7 +28,17 @@ Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[]
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0),
+"variation_embolden": 0.0,
+"variation_opentype": {
+1936486004: 0,
+2003265652: 400
+}
+}]
 language_support={}
 script_support={}
 opentype_features={}
