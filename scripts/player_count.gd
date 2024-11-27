@@ -3,7 +3,7 @@ extends Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	GameManager.on_debug_rpc.connect(_debug_rpc)
+	#GameManager.on_debug_rpc.connect(_debug_rpc)
 	NetworkManager.player_connected.connect(_on_player_connected)
 
 
