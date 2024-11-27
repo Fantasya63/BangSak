@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://c277i8863ij4c"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://c277i8863ij4c"]
 
 [ext_resource type="FontFile" uid="uid://kb8pm310g163" path="res://fonts/Montseratt/static/Montserrat-Bold.ttf" id="1_3llhe"]
 [ext_resource type="StyleBox" uid="uid://ckfb2kw6xsrq" path="res://themes/styles/panel.tres" id="1_r1656"]
@@ -42,6 +42,16 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="FontVariation" id="FontVariation_e4au5"]
+base_font = ExtResource("2_iflhg")
+variation_opentype = {
+1936486004: 0,
+2003265652: 700
+}
+
+[sub_resource type="FontVariation" id="FontVariation_k0xuj"]
+base_font = ExtResource("2_iflhg")
+
 [sub_resource type="FontFile" id="FontFile_g3nem"]
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
@@ -71,3 +81,6 @@ PopupButton/font_sizes/font_size = 20
 PopupButton/fonts/font = SubResource("FontVariation_bo6xa")
 PopupButton/styles/normal = SubResource("StyleBoxFlat_2yd88")
 PopupPanel/styles/panel = ExtResource("1_r1656")
+RichTextLabel/colors/default_color = Color(0.156863, 0.156863, 0.156863, 1)
+RichTextLabel/fonts/bold_font = SubResource("FontVariation_e4au5")
+RichTextLabel/fonts/normal_font = SubResource("FontVariation_k0xuj")

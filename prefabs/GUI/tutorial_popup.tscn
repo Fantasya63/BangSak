@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8p67iurn7liy"]
+
+[ext_resource type="Theme" uid="uid://c277i8863ij4c" path="res://new_theme.tres" id="1_ub5o1"]
+[ext_resource type="Script" path="res://scripts/tutorial_popup.gd" id="2_ri2h8"]
+
+[node name="tutorial_popup" type="PopupPanel"]
+transparent_bg = true
+initial_position = 1
+size = Vector2i(484, 370)
+visible = true
+transparent = true
+theme = ExtResource("1_ub5o1")
+script = ExtResource("2_ri2h8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 48.0
+offset_top = 22.0
+offset_right = 436.0
+offset_bottom = 348.0
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ub5o1")
+theme_type_variation = &"HeaderLarge"
+text = "How to Play"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 258.025)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("1_ub5o1")
+bbcode_enabled = true
+text = "[b]Controls[/b]
+
+Use [b]WASD[/b] to move around the scene and [b]RMB[/b] to perform a bang or Sak and Shift to sprint
+
+[b]Mechanics:[/b]
+
+1. The seeker waits for [b]30[/b] seconds for all the players to hide. When the time is up, the seeker can now move and find the hiders
+
+2. In eliminating a hider, the seeker must [b]BANG[/b]  the hider with his finger gun that shoots bullets
+
+3. If all hiders are [b]eliminated[/b], the [b]seeker wins.[/b]
+
+4.  However, if a hider manages to [b]sneak[/b] near the seeker and perform [b]SAK[/b], the [b]hiders win[/b] and the seeker must count to 30 again.
+
+5. When [b]all hiders are eliminated[/b], the [b]first[/b] hider to be eliminated becomes the [b]next seeker.[/b]
+"
+fit_content = true

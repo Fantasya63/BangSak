@@ -209,24 +209,28 @@ func play_anim():
 		anim.speed_scale = speed * anim_speed_scale * 0.1
 	else:
 		anim.speed_scale = 1.0
-		
-	if eliminated:
-		anim.flip_h = sprite_dir == SPRITE_DIR.LEFT
-		return
 	
 	match sprite_dir:
 		SPRITE_DIR.UP:
 			# Dont flip the sprite
 			anim.flip_h = false
-			if speed > 0:
+			if eliminated:
+				anim.play("up_eliminated")
+			
+			elif speed > 0:
 				anim.play("up_walk")
 			else:
 				anim.play("up_idle")
 		
+		
 		SPRITE_DIR.DOWN:
 			# Dont flip the sprite
 			anim.flip_h = false
-			if speed > 0:
+			if eliminated:
+				anim.play("down_eliminated")
+				
+			
+			elif speed > 0:
 				anim.play("down_walk")
 			else:
 				anim.play("down_idle")
@@ -234,7 +238,10 @@ func play_anim():
 		SPRITE_DIR.LEFT:
 			# Dont flip the sprite
 			anim.flip_h = true
-			if speed > 0:
+			if eliminated:
+				anim.play("side_eliminated")
+			
+			elif speed > 0:
 				anim.play("side_walk")
 			else:
 				anim.play("side_idle")
@@ -242,7 +249,10 @@ func play_anim():
 		SPRITE_DIR.RIGHT:
 			# Dont flip the sprite
 			anim.flip_h = false
-			if speed > 0:
+			if eliminated:
+				anim.play("side_eliminated")
+			
+			elif speed > 0:
 				anim.play("side_walk")
 			else:
 				anim.play("side_idle")

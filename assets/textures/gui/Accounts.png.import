@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cptt6qmf2s47s"
-path="res://.godot/imported/boy.png-123cd9c3bc9501420eaeec6d81714829.ctex"
+uid="uid://cppvulbwskved"
+path="res://.godot/imported/Accounts.png-c7dee8da2ccc62ec1fb5107f63330b66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/character/boy.png"
-dest_files=["res://.godot/imported/boy.png-123cd9c3bc9501420eaeec6d81714829.ctex"]
+source_file="res://assets/textures/gui/Accounts.png"
+dest_files=["res://.godot/imported/Accounts.png-c7dee8da2ccc62ec1fb5107f63330b66.ctex"]
 
 [params]
 

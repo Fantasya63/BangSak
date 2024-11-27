@@ -1,13 +1,21 @@
-[gd_scene load_steps=18 format=3 uid="uid://bw6viuij2kx0s"]
+[gd_scene load_steps=21 format=3 uid="uid://bw6viuij2kx0s"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_ky4fw"]
 [ext_resource type="FontFile" uid="uid://kb8pm310g163" path="res://fonts/Montseratt/static/Montserrat-Bold.ttf" id="2_ylcoa"]
 [ext_resource type="FontFile" uid="uid://6r342ivmh023" path="res://fonts/Quiapo/Quiapo_Free.ttf" id="3_xlh6t"]
-[ext_resource type="Texture2D" uid="uid://dxn3rir74cuat" path="res://assets/textures/gui/account_icon.svg" id="4_pavrp"]
-[ext_resource type="Texture2D" uid="uid://dwcwph7b6ocge" path="res://assets/textures/gui/account_icon_pressed.svg" id="5_3p6ak"]
+[ext_resource type="Texture2D" uid="uid://cppvulbwskved" path="res://assets/textures/gui/Accounts.png" id="4_u38k1"]
+[ext_resource type="Texture2D" uid="uid://diuraxjygafxo" path="res://assets/textures/gui/Accounts_pressed.png" id="5_j0ks3"]
 [ext_resource type="PackedScene" uid="uid://b0s62dm42825l" path="res://prefabs/GUI/popup_panel.tscn" id="6_p13v1"]
+[ext_resource type="Texture2D" uid="uid://c7ipvm4yv736f" path="res://assets/textures/gui/tutorial_normal_btn.png" id="7_h602k"]
+[ext_resource type="PackedScene" uid="uid://b8p67iurn7liy" path="res://prefabs/GUI/tutorial_popup.tscn" id="7_ocnjd"]
 [ext_resource type="PackedScene" uid="uid://dbybxorpqittp" path="res://prefabs/GUI/account_popup.tscn" id="7_qgwy6"]
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="8_7ioml"]
+[ext_resource type="Texture2D" uid="uid://cmxyulay62xrg" path="res://assets/textures/gui/tutorial_hover.svg" id="8_hu5i4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_661ae"]
+shader = ExtResource("8_7ioml")
+shader_parameter/outerRadius = 3.723
+shader_parameter/MainAlpha = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wok60"]
 content_margin_left = 4.0
@@ -109,15 +117,19 @@ RichTextLabel/styles/normal = SubResource("StyleBoxFlat_8wakh")
 
 [sub_resource type="Theme" id="Theme_0jj44"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_661ae"]
-shader = ExtResource("8_7ioml")
-shader_parameter/outerRadius = 3.723
-shader_parameter/MainAlpha = 1.0
-
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_ky4fw")
 join_popup_path = NodePath("Control/PopupPanel")
 account_popup_path = NodePath("Control/account")
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_661ae")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -184,38 +196,51 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Exit"
 
-[node name="accountBtn" type="TextureButton" parent="Control"]
-texture_filter = 2
+[node name="PopupPanel" parent="Control" instance=ExtResource("6_p13v1")]
+
+[node name="account" parent="Control" instance=ExtResource("7_qgwy6")]
+
+[node name="tutorial_popup" parent="Control" instance=ExtResource("7_ocnjd")]
+max_size = Vector2i(32768, 370)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -78.0
-offset_top = -71.0
-offset_right = -34.0
-offset_bottom = -27.0
+offset_left = -129.0
+offset_top = -73.0
+offset_right = -29.0
+offset_bottom = -25.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("4_pavrp")
-texture_pressed = ExtResource("4_pavrp")
-texture_hover = ExtResource("5_3p6ak")
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="how_to_play" type="TextureButton" parent="Control/HBoxContainer"]
+texture_filter = 2
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_h602k")
+texture_pressed = ExtResource("7_h602k")
+texture_hover = ExtResource("8_hu5i4")
 ignore_texture_size = true
 
-[node name="PopupPanel" parent="Control" instance=ExtResource("6_p13v1")]
-
-[node name="account" parent="Control" instance=ExtResource("7_qgwy6")]
-
-[node name="Panel" type="Panel" parent="."]
-material = SubResource("ShaderMaterial_661ae")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="accountBtn" type="TextureButton" parent="Control/HBoxContainer"]
+texture_filter = 2
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_u38k1")
+texture_pressed = ExtResource("4_u38k1")
+texture_hover = ExtResource("5_j0ks3")
+ignore_texture_size = true
 
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Buttons/CreateBtn" to="." method="_on_create_btn_pressed"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Buttons/JoinBtn" to="." method="_on_join_btn_pressed"]
-[connection signal="pressed" from="Control/accountBtn" to="." method="_on_account_btn_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Buttons/ExitBtn" to="." method="_on_exit_btn_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/how_to_play" to="." method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/accountBtn" to="." method="_on_account_btn_pressed"]

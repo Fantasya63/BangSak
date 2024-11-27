@@ -48,6 +48,10 @@ func rpc_apply_fire():
 func _apply_flash():
 	var flash : AnimatedSprite2D = $muzzle_flash
 	flash.visible = true
+	
+	if flash.is_playing():
+		flash.stop()
+	
 	flash.play("fire")
 	await get_tree().create_timer(0.9).timeout
 	flash.visible = false

@@ -2,6 +2,8 @@ extends Node
 
 enum TEAM { Seeker, Hider }
 
+var first_eliminated : int = 0
+
 var players : Dictionary = {
 	# ID, #GameStat
 }

@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://c277i8863ij4c" path="res://new_theme.tres" id="1_g57nc"]
 
 [node name="PopupPanel" type="PopupPanel"]
+transparent_bg = true
 initial_position = 1
 size = Vector2i(374, 301)
 visible = true
