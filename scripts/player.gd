@@ -37,8 +37,9 @@ var sprite_dir : SPRITE_DIR = SPRITE_DIR.DOWN
 var speed := 0.0
 var player_info 
 var eliminated := false
-
+var gender : String
 var cam : FollowCam
+var win : bool
 
 func get_cam() -> FollowCam:
 	return cam
@@ -46,15 +47,22 @@ func get_cam() -> FollowCam:
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
+	NetworkManager.on_player_gender_reply.connect(_on_player_gender_reply)
 	
-
+func _on_player_gender_reply(gender_reply, id):
+	if id == authority_id:
+		gender = gender_reply
+		
 func _ready():
 	#print("SHAKE : ", shake)
 	GameManager.on_countdown_ended.connect(_server_on_countdown_ended)
 	GameManager.on_player_attacked.connect(_on_player_attacked)
 	GameManager.game_started.connect(_on_game_started)
+	GameManager.game_ended.connect(_on_game_ended)
 	$PlayerHitbox.playerID = name.to_int()
-	anim.play("down_idle")
+	NetworkManager.ask_player_gender.rpc_id(1, authority_id)
+	
+	anim.play("boy_down_idle")
 	
 	for weapon : BaseWeapon in weapons:
 		weapon.disable()
@@ -76,11 +84,15 @@ func _ready():
 	$weapons/bang_holder/bang.player = self
 
 
-
+func _on_game_ended(winner : int):
+	if winner == team:
+		win = true
+		
 # resets the playey to be ready to start another game
 func reset():
 	# Get team from manager
-	anim.play("down_idle")
+	win = false
+	anim.play(gender + "_down_idle")
 	team = GameManager.get_team(name.to_int())
 	set_weapon()
 	
@@ -108,6 +120,7 @@ func _server_on_countdown_ended():
 # Called by the game manager when the game is started
 func _on_game_started():
 	reset()
+	position = Vector2(0,0)
 	
 	if team == 0:
 		set_process(false)
@@ -140,12 +153,14 @@ func set_name_tag_with_name(_name: String):
 
 func set_name_tag():
 	var _name = NetworkManager.players[name.to_int()]['name']
+	
+	print_debug(_name)
 	if not _name:
 		if OS.is_debug_build():
 			breakpoint
 		_name = "name"
+		
 	$nametag.text = _name
-
 
 func _physics_process(delta):
 	if GameManager.is_game_started():
@@ -209,53 +224,43 @@ func play_anim():
 		anim.speed_scale = speed * anim_speed_scale * 0.1
 	else:
 		anim.speed_scale = 1.0
+		
+	var dir : String = ""
+	var movement : String = ""
 	
-	match sprite_dir:
-		SPRITE_DIR.UP:
-			# Dont flip the sprite
-			anim.flip_h = false
-			if eliminated:
-				anim.play("up_eliminated")
-			
-			elif speed > 0:
-				anim.play("up_walk")
-			else:
-				anim.play("up_idle")
-		
-		
-		SPRITE_DIR.DOWN:
-			# Dont flip the sprite
-			anim.flip_h = false
-			if eliminated:
-				anim.play("down_eliminated")
+	if not win:
+		match sprite_dir:
+			SPRITE_DIR.UP:
+				# Dont flip the sprite
+				anim.flip_h = false
+				dir = "up"
 				
+			SPRITE_DIR.DOWN:
+				# Dont flip the sprite
+				anim.flip_h = false
+				dir = "down"
+				
+			SPRITE_DIR.LEFT:
+				# Dont flip the sprite
+				anim.flip_h = true
+				dir = "side"
 			
-			elif speed > 0:
-				anim.play("down_walk")
-			else:
-				anim.play("down_idle")
+			SPRITE_DIR.RIGHT:
+				# Dont flip the sprite
+				anim.flip_h = false
+				dir = "side"
 		
-		SPRITE_DIR.LEFT:
-			# Dont flip the sprite
-			anim.flip_h = true
-			if eliminated:
-				anim.play("side_eliminated")
+		if speed == 0:
+			movement = "idle"
+		else:
+			movement = "walk"
 			
-			elif speed > 0:
-				anim.play("side_walk")
-			else:
-				anim.play("side_idle")
-		
-		SPRITE_DIR.RIGHT:
-			# Dont flip the sprite
-			anim.flip_h = false
-			if eliminated:
-				anim.play("side_eliminated")
-			
-			elif speed > 0:
-				anim.play("side_walk")
-			else:
-				anim.play("side_idle")
+		if not eliminated:
+			anim.play(gender + "_" + dir + "_" + movement)
+		else:
+			anim.play(dir + "_eliminated")
+	else:
+		anim.play(gender + "_" +"victory")
 
 		# TODO: REFACTOR TO INCLUDE ELIMINATED STATE IN PLAYING ANIM
 
@@ -281,6 +286,6 @@ func eliminate():
 	set_process_input(false)
 	$CollisionShape2D.set_deferred("disabled", true)
 	$PlayerHitbox/CollisionShape2D.set_deferred("disabled", true)
-	anim.modulate = eliminated_color
-	anim.play("eliminated")
+	#anim.modulate = eliminated_color
+	#anim.play("eliminated")
 	disable_weapons()

@@ -24,7 +24,7 @@ var players = {}
 # entered in a UI scene.
 var player_info = {
 	"name": "Name",
-	"gender": 0,
+	"gender": "boy",
 }
 
 
@@ -113,6 +113,21 @@ func ask_player_name(id : int):
 	var requestor = multiplayer.get_remote_sender_id()
 	_reply_player_name.rpc_id(requestor, players[id]['name'], id)
 
+signal on_player_gender_reply(gender : String, id : int)
+
+
+@rpc("authority", "call_local", "reliable")
+func _reply_player_gender(gender, id):
+	on_player_gender_reply.emit(gender, id)
+
+@rpc("any_peer", "call_local", "reliable")
+func ask_player_gender(id : int):
+	if not multiplayer.is_server():
+		print_debug("ERROR: Ask player info is called on a non server")
+		return
+	
+	var requestor = multiplayer.get_remote_sender_id()
+	_reply_player_gender.rpc_id(requestor, players[id]['gender'], id)
 
 # Local
 @rpc("any_peer", "reliable" )

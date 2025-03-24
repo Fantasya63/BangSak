@@ -9,8 +9,7 @@ func _ready():
 
 func _on_game_started():
 	visible = false
-
-
+	
 func _on_game_ended(winner : int):
 	var playerID = multiplayer.get_unique_id()
 	if winner == GameManager.get_team(playerID):

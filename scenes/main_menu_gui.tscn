@@ -212,7 +212,7 @@ visible = false
 
 [node name="tutorial_popup" parent="Control" instance=ExtResource("7_ocnjd")]
 visible = false
-max_size = Vector2i(32768, 370)
+max_size = Vector2i(16384, 370)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 layout_mode = 1

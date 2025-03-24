@@ -176,6 +176,5 @@ func rpc_on_player_fire():
 	var player : Player = get_tree().root.get_node("Game").get_node(str(senderID))
 	if player:
 		player.rpc_fire()
-	
 	if OS.is_debug_build():
 		on_debug_rpc.emit(multiplayer.get_remote_sender_id())

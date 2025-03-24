@@ -13,4 +13,8 @@ func _on_save_btn_pressed():
 		return
 	
 	NetworkManager.player_info['name'] = username_input.text
+	if username_input.text[-1] == "a":
+		NetworkManager.player_info['gender'] = "girl"
+	else:
+		NetworkManager.player_info['gender'] = "boy"
 	self.visible = false
